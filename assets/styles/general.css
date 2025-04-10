@@ -1,0 +1,223 @@
+/* IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* VARIABLES */
+:root{
+    --color-white: #FFFFFF;
+    --color-whitesmoke: #F5F5F5;
+    --color-placeholder: #AEAEAE;
+    --color-black: #000000;
+    --color-primary: #1A7941;
+
+    --page-padding: 100px;
+}
+
+/* GENERAL STYLE */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 20px;
+}
+body{
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    margin-top: 80px;
+}
+
+/* HEADER */
+header{
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 80px;
+
+    background-color: var(--color-white);
+    border-bottom: 3px solid var(--color-whitesmoke);
+}
+
+header nav{
+    height: 100%;
+}
+header nav ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+header nav ul li{
+    list-style: none;
+}
+header nav ul li a{
+    padding: 25px 30px;
+    color: var(--color-black);
+    text-decoration: none;
+    outline: none;
+    transition-duration: 0.1s;
+    font-size: 1rem;
+}
+header nav ul li a:hover, header nav ul li a:focus{
+    color: var(--color-primary);
+}
+
+/* MAIN */
+main{
+    padding: var(--page-padding);
+    min-height: calc(100vh - 80px - 260px);
+    position: relative;
+}
+
+h1{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-black);
+    text-align: center;
+    margin: 0 60px 0 60px;
+}
+
+p.subtitle{
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 60px 60px 60px;
+}
+
+/* ICONS */
+.icon{
+    font-size: 'Material Symbols Outlined';
+    font-weight: 24px;
+    color: var(--color-black);
+}
+
+/* BUTTONS */
+.btn{
+    --main-color: transparent;
+    background-color: var(--main-color);
+    color: var(--color-black);
+    padding: 20px 40px;
+    border-radius: 14px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    user-select: none;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+.btn span:first-child{
+    font-size: 24px;
+    font-family: 'Material Symbols Outlined';
+}
+.btn:hover{
+    background-color: color-mix(in srgb, var(--main-color), transparent 10%);
+}
+.btn:focus{
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), transparent 60%);
+}
+.btn:active{
+    transform: scale(0.95);
+}
+
+.btn-primary{
+    --main-color: var(--color-primary);
+    color: var(--color-white);
+}
+.btn-secondary{
+    --main-color: var(--color-whitesmoke);
+    color: var(--color-black);
+}
+.btn-secondary:focus{
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), black 10%);
+}
+.btn-secondary-darker{
+    --main-color: color-mix(in srgb, var(--color-whitesmoke), black 10%);
+    color: var(--color-black);
+}
+.btn-facebook{
+    --main-color: #1877f2;
+    color: var(--color-white);
+}
+.btn-danger{
+    --main-color: #dc3545;
+    color: var(--color-white);
+}
+
+/* INPUT */
+.field{
+    --main-color: var(--color-primary);
+    background-color: var(--color-whitesmoke);
+    color: var(--color-black);
+    padding: 20px;
+    border-radius: 14px;
+    border: 3px solid transparent;
+    gap: 10px;
+    outline: none;
+    font-size: 1rem;
+    transition-duration: 0.2s;
+}
+.field::placeholder{
+    color: var(--color-placeholder);
+}
+.field:hover, .field:focus, .field:active{
+    border: 3px solid color-mix(in srgb, var(--main-color), transparent 10%);
+}
+.field:focus, .field:active{
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), transparent 60%);
+}
+
+/* FOOTER */
+footer{
+    width: 100%;
+    background-color: #1A7941;
+    padding: 60px;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+    border-radius: 30px 30px 0 0;
+}
+footer div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+footer div:nth-child(1){
+    text-align: left;
+}
+footer div:nth-child(2){
+    text-align: center;
+}
+footer div:nth-child(3){
+    text-align: right;
+}
+footer p{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+footer a{
+    color: var(--color-white);
+    font-size: 1rem;
+    text-decoration: none;
+    transition-duration: 0.1s;
+    outline: none;
+}
+footer a:focus{
+    text-decoration: underline;
+}
+footer a:hover, footer a:focus{
+    color: var(--color-whitesmoke);
+}

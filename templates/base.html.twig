@@ -2,16 +2,63 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Pascal Doucet{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link rel="stylesheet" href="{{ asset('styles/general.css') }}">
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
     </head>
     <body>
+
+        <!-- HEADER -->
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('index') }}">Accueil</a></li>
+                    <li><a href="#">Prestations</a></li>
+                    <li><a href="#">Mon parcours</a></li>
+                    <li><a href="#">Articles</a></li>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- BODY -->
         {% block body %}{% endblock %}
+
+        <!-- FOOTER -->
+        <footer>
+            <div>
+                <p>Pascal Doucet</p>
+                <a href="tel:+3302313380">06.02.31.33.80</a>
+                <a href="mail:mieuxetre.pdoucet@netc.fr">mieuxetre.pdoucet@netc.fr</a>
+                <a href="https://pdoucet.fr">pdoucet.fr</a>
+            </div>
+            <div>
+                <p>Site web</p>
+                <a href="/legal">Mentions légales</a>
+                {% if is_admin() %}
+                    <a href="/logout">Se déconnecter</a>
+                {% else %}
+                    <a href="/login">Connexion</a>
+                {% endif %}
+                <a href="#">Copyright &copy; Pascal Doucet - 2025</a>
+            </div>
+            <div>
+                <p>Réseaux sociaux</p>
+                <a href="#">@pascaldoucet</a>
+                <a href="#">/pdoucet</a>
+                <a href="#">@mieuxetre</a>
+            </div>
+        </footer>
+        
+        <!-- SCRIPTS -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        {% block javascripts %}
+        {% endblock %}
+    
     </body>
 </html>

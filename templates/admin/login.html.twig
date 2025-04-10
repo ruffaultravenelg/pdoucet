@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion Admin{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/login.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <h1>Connexion</h1>
+    <p class="subtitle">Accéder à l'interface d'administration.</p>
+
+    {% for error in app.flashes('error') %}
+        <p class="error">{{ error }}</p>
+    {% endfor %}
+
+    <form method="post">
+        <input type="password" class="field" name="password" placeholder="Mot de passe">
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+    </form>
+
+</main>
+
+{% endblock %}

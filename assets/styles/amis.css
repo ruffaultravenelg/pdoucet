@@ -1,0 +1,53 @@
+.friend-container{
+    width: 100%;
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.friend{
+    max-width: 500px;
+    background-color: var(--color-whitesmoke);
+    padding: 30px;
+    border-radius: 15px;
+    position: relative;
+}
+.friend .avatar{
+    width: 200px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+.friend .fullname{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-black);
+}
+.friend .description{
+    font-size: 1rem;
+    color: var(--color-black);
+    text-align: justify;
+    margin-bottom: 8px;
+}
+.friend > a{
+    margin-top: 15px;
+}
+
+#person_add{
+    position: absolute;
+    top: var(--page-padding);
+    right: var(--page-padding);
+}
+
+.admin-btn{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.admin-btn > *{
+    padding: 15px;
+}

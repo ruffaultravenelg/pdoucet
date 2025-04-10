@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Amis{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/amis.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+{% if app.session.get('is_admin') == true %}
+<script type="module" src="{{ asset('js/amis_admin.js') }}"></script>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+
+<main>
+    
+    <h1>Liens amis</h1>
+    <p class="subtitle">Composantes personnes</p>
+
+    <div class="friend-container">
+        {% for ami in amis %}
+            <div class="friend">
+
+                <img src="{{ ami.avatarUrl | default('https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcQrJzSTI4OI2aLe6DgXajqOO5E87Z3nGiTCZcn_-Q9xqZ_CLtLNLeYib4xxZUSGZgzb') }}" alt="Photo de {{ ami.fullname }}" class="avatar" />
+
+                <p class="fullname">{{ ami.fullname }}</p>
+
+                {% if ami.description %}
+                    <p class="description">{{ ami.description }}</p>
+                {% endif %}
+
+                {% if ami.websiteUrl %}
+                    <a class="btn btn-secondary-darker" href="{{ ami.websiteUrl }}" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">language</span>Site web</a>
+                {% endif %}
+
+                {% if ami.facebookUrl %}
+                    <a class="btn btn-facebook" href="{{ ami.facebookUrl }}" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">share</span>Facebook</a>
+                {% endif %}
+                
+                {% if is_admin() %}
+                    <div class="admin-btn">
+                        <a  class="btn btn-primary" href="{{ path('friend_edit', { id: ami.id }) }}"><span class="material-symbols-outlined">edit</span></a>
+                        <button class="btn btn-danger" delpath="{{ path('friend_delete', { id: ami.id }) }}"><span class="material-symbols-outlined">delete</span></button>
+                    </div>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    </div>
+    
+    {% if is_admin() %}
+        <a class="btn btn-primary" id="person_add" href="{{ path('friend_create') }}"><span>person_add</span><!--  Ajouter un ami --></a>
+    {% endif %}
+
+</main>
+
+{% endblock %}

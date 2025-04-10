@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un ami{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/create_friend.css') }}">
+<link rel="stylesheet" href="{{ asset('styles/admin_form.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+{% if app.session.get('is_admin') == true %}
+<script type="module" src="{{ asset('js/amis_admin.js') }}"></script>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+
+<main>
+    
+    <h1>Modifier les information de {{friend.fullname}}</h1>
+    <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
+
+    {{ form_start(form) }}
+    
+    <div class="form-field requiered">
+        {{ form_label(form.fullname) }}
+        {{ form_widget(form.fullname, {'attr': {'class': 'field', 'placeholder': 'John Doe'}}) }}
+        {{ form_errors(form.fullname) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'field', 'placeholder': 'Une description.'}}) }}
+        {{ form_errors(form.description) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.avatar_url) }}
+        {{ form_widget(form.avatar_url, {'attr': {'class': 'field', 'placeholder': 'https://example.com'}}) }}
+        {{ form_errors(form.avatar_url) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.website_url) }}
+        {{ form_widget(form.website_url, {'attr': {'class': 'field', 'placeholder': 'https://example.com'}}) }}
+        {{ form_errors(form.website_url) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.facebook_url) }}
+        {{ form_widget(form.facebook_url, {'attr': {'class': 'field', 'placeholder': 'https://example.com'}}) }}
+        {{ form_errors(form.facebook_url) }}
+    </div>
+    
+    <div class="form-actions">
+        <a href="{{ path('friends') }}" class="btn btn-secondary">Annuler</a>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    
+    {{ form_end(form) }}
+
+</main>
+
+{% endblock %}
