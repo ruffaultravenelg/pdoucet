@@ -2,6 +2,10 @@
 
 {% block title %}Ajouter un ami{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/admin_form.css') }}">
+{% endblock %}
+
 {% block body %}
 
 <main>
@@ -13,31 +17,31 @@
     
     <div class="form-field requiered">
         {{ form_label(form.fullname) }}
-        {{ form_widget(form.fullname, {'attr': {'class': 'field', 'placeholder': 'John Doe'}}) }}
+        {{ form_widget(form.fullname) }}
         {{ form_errors(form.fullname) }}
     </div>
     
     <div class="form-field">
         {{ form_label(form.description) }}
-        {{ form_widget(form.description, {'attr': {'class': 'field', 'placeholder': 'Une description.'}}) }}
+        {{ form_widget(form.description) }}
         {{ form_errors(form.description) }}
     </div>
     
     <div class="form-field">
         {{ form_label(form.avatar_url) }}
-        {{ form_widget(form.avatar_url, {'attr': {'class': 'field', 'placeholder': 'https://example.com'}}) }}
+        {{ form_widget(form.avatar_url) }}
         {{ form_errors(form.avatar_url) }}
     </div>
     
     <div class="form-field">
         {{ form_label(form.website_url) }}
-        {{ form_widget(form.website_url, {'attr': {'class': 'field', 'placeholder': 'https://example.com'}}) }}
+        {{ form_widget(form.website_url) }}
         {{ form_errors(form.website_url) }}
     </div>
     
     <div class="form-field">
         {{ form_label(form.facebook_url) }}
-        {{ form_widget(form.facebook_url, {'attr': {'class': 'field', 'placeholder': 'https://example.com'}}) }}
+        {{ form_widget(form.facebook_url) }}
         {{ form_errors(form.facebook_url) }}
     </div>
     

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Depeche;
 use App\Entity\HeartPic;
 use App\Entity\IndexLink;
+use App\Form\DepecheType;
 use App\Form\HeartPicType;
 use App\Form\IndexLinkType;
 use App\Service\AdminService;
@@ -34,6 +35,7 @@ final class HomeController extends AbstractController
             ['date' => 'DESC'],
             7
         );
+
         $negativeDepeches = $em->getRepository(Depeche::class)->findBy(
             ['is_positive' => false],
             ['date' => 'DESC'],
@@ -195,6 +197,54 @@ final class HomeController extends AbstractController
         return $this->render('home/edit_indexlink.html.twig', [
             'form' => $form,
             'indexlink' => $indexLink,
+        ]);
+        
+    }
+
+    /////////////////
+    //// DEPECHE ////
+    /////////////////
+
+    // Delete
+    #[Route('/depeche/{id}/delete', name: 'depeche_delete')]
+    public function depeche_delete(EntityManagerInterface $em, Depeche $depeche, AdminService $adminService): Response
+    {
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+
+        $em->remove($depeche);
+        $em->flush();
+
+        return $this->redirectToRoute('index');
+    }
+
+    // Create
+    #[Route('/depeche/create', name: 'depeche_create')]
+    public function depeche_create(EntityManagerInterface $em, AdminService $adminService, Request $request): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+
+        $depeche = new Depeche();
+        $form = $this->createForm(DepecheType::class, $depeche);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $depeche->setDate(new \DateTimeImmutable()); // Set current date
+
+            $em->persist($depeche);
+            $em->flush();
+            
+            return $this->redirectToRoute('index');
+        }
+        
+        // Render page
+        return $this->render('home/create_depeche.html.twig', [
+            'form' => $form
         ]);
         
     }

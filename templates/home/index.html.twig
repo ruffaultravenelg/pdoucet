@@ -124,7 +124,7 @@
     <div>
         <p class="depeche-title">Les <span>mauvaises</span> nouvelles</p>
         <ul>
-            {% for depeche in positiveDepeches %}
+            {% for depeche in negativeDepeches %}
             <li><span class="material-symbols-outlined">sentiment_dissatisfied</span>{{ depeche.text }}</li>
             {% endfor %}
         <ul/>
@@ -136,7 +136,7 @@
     </div>
 
     {% if is_admin() %}
-    <a class="btn btn-secondary-darker add" href=""><span>add</span>Ajouter une dépêche</a>
+    <a class="btn btn-secondary-darker add" href="{{ path('depeche_create') }}"><span>add</span>Ajouter une dépêche</a>
     {% endif %}
 
 </section>

@@ -17,31 +17,31 @@
     
     <div class="form-field requiered">
         {{ form_label(form.title) }}
-        {{ form_widget(form.title, {'attr': {'class': 'field', 'placeholder': 'Titre'}}) }}
+        {{ form_widget(form.title) }}
         {{ form_errors(form.title) }}
     </div>
     
     <div class="form-field">
         {{ form_label(form.subtitle) }}
-        {{ form_widget(form.subtitle, {'attr': {'class': 'field', 'placeholder': 'Un sous titre'}}) }}
+        {{ form_widget(form.subtitle) }}
         {{ form_errors(form.subtitle) }}
     </div>
     
     <div class="form-field">
         {{ form_label(form.text) }}
-        {{ form_widget(form.text, {'attr': {'class': 'field', 'placeholder': 'Lorem impsum...'}}) }}
+        {{ form_widget(form.text) }}
         {{ form_errors(form.text) }}
     </div>
     
     <div class="form-field requiered">
         {{ form_label(form.image) }}
-        {{ form_widget(form.image, {'attr': {'class': 'field', 'placeholder': 'test.svg'}}) }}
+        {{ form_widget(form.image) }}
         {{ form_errors(form.image) }}
     </div>
     
     <div class="form-field">
         {{ form_label(form.link) }}
-        {{ form_widget(form.link, {'attr': {'class': 'field', 'placeholder': 'https://example.com'}}) }}
+        {{ form_widget(form.link) }}
         {{ form_errors(form.link) }}
     </div>
     

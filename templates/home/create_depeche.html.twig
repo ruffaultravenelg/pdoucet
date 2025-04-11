@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier un lien{% endblock %}
+{% block title %}Ajouter un dépêche{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('styles/admin_form.css') }}">
@@ -10,27 +10,21 @@
 
 <main>
     
-    <h1>Modifier un lien</h1>
+    <h1>Ajouter une dépêche</h1>
     <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
 
     {{ form_start(form) }}
     
-        <div class="form-field requiered">
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name) }}
-        {{ form_errors(form.name) }}
+    <div class="form-field requiered">
+        {{ form_label(form.text) }}
+        {{ form_widget(form.text) }}
+        {{ form_errors(form.text) }}
     </div>
     
     <div class="form-field requiered">
-        {{ form_label(form.image) }}
-        {{ form_widget(form.image) }}
-        {{ form_errors(form.image) }}
-    </div>
-    
-    <div class="form-field requiered">
-        {{ form_label(form.url) }}
-        {{ form_widget(form.url) }}
-        {{ form_errors(form.url) }}
+        {{ form_label(form.is_positive) }}
+        {{ form_widget(form.is_positive) }}
+        {{ form_errors(form.is_positive) }}
     </div>
     
     <div class="form-actions">

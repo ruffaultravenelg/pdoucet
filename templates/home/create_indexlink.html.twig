@@ -17,19 +17,19 @@
     
     <div class="form-field requiered">
         {{ form_label(form.name) }}
-        {{ form_widget(form.name, {'attr': {'class': 'field', 'placeholder': 'Articles'}}) }}
+        {{ form_widget(form.name) }}
         {{ form_errors(form.name) }}
     </div>
     
     <div class="form-field requiered">
         {{ form_label(form.image) }}
-        {{ form_widget(form.image, {'attr': {'class': 'field', 'placeholder': 'articles.png'}}) }}
+        {{ form_widget(form.image) }}
         {{ form_errors(form.image) }}
     </div>
     
     <div class="form-field requiered">
         {{ form_label(form.url) }}
-        {{ form_widget(form.url, {'attr': {'class': 'field', 'placeholder': '/articles'}}) }}
+        {{ form_widget(form.url) }}
         {{ form_errors(form.url) }}
     </div>
     

@@ -17,14 +17,47 @@ class FriendType extends AbstractType
         $builder
             ->add('fullname', TextType::class, [
                 'label' => 'Nom complet',
+                'attr' => [
+                    'placeholder' => 'Nom complet',
+                    'maxlength' => 255,
+                    'class' => 'field',
+                ],
                 'constraints' => [
                     new Constraints\NotBlank(['message' => 'Le nom est obligatoire'])
                 ]
             ])
-            ->add('description')
-            ->add('avatar_url')
-            ->add('website_url')
-            ->add('facebook_url')
+            ->add('description', TextType::class, [
+                'label' => 'Description',
+                'attr' => [
+                    'placeholder' => 'Description',
+                    'maxlength' => 255,
+                    'class' => 'field',
+                ],
+            ])
+            ->add('avatar_url', TextType::class, [
+                'label' => 'URL de l\'avatar',
+                'attr' => [
+                    'placeholder' => 'URL de l\'avatar',
+                    'maxlength' => 255,
+                    'class' => 'field',
+                ],
+            ])
+            ->add('website_url', TextType::class, [
+                'label' => 'URL du site',
+                'attr' => [
+                    'placeholder' => 'URL du site',
+                    'maxlength' => 255,
+                    'class' => 'field',
+                ],
+            ])
+            ->add('facebook_url', TextType::class, [
+                'label' => 'URL Facebook',
+                'attr' => [
+                    'placeholder' => 'URL Facebook',
+                    'maxlength' => 255,
+                    'class' => 'field',
+                ],
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => $options['submit_label'],
             ])
