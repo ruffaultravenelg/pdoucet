@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un coup de coeur{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/admin_form.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<main>
+    
+    <h1>Ajouter un coup de coeur</h1>
+    <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
+
+    {{ form_start(form) }}
+    
+    <div class="form-field requiered">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title, {'attr': {'class': 'field', 'placeholder': 'Titre'}}) }}
+        {{ form_errors(form.title) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.subtitle) }}
+        {{ form_widget(form.subtitle, {'attr': {'class': 'field', 'placeholder': 'Un sous titre'}}) }}
+        {{ form_errors(form.subtitle) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.text) }}
+        {{ form_widget(form.text, {'attr': {'class': 'field', 'placeholder': 'Lorem impsum...'}}) }}
+        {{ form_errors(form.text) }}
+    </div>
+    
+    <div class="form-field requiered">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image, {'attr': {'class': 'field', 'placeholder': 'test.svg'}}) }}
+        {{ form_errors(form.image) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.link) }}
+        {{ form_widget(form.link, {'attr': {'class': 'field', 'placeholder': 'https://example.com'}}) }}
+        {{ form_errors(form.link) }}
+    </div>
+    
+    <div class="form-actions">
+        <a href="{{ path('index') }}" class="btn btn-secondary">Annuler</a>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    
+    {{ form_end(form) }}
+
+</main>
+
+{% endblock %}

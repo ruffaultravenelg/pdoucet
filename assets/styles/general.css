@@ -232,3 +232,19 @@ footer a:focus{
 footer a:hover, footer a:focus{
     color: var(--color-whitesmoke);
 }
+
+/* ADMIN */
+.card-admin-actions{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    opacity: 0.8;
+}
+.card-admin-actions > *{
+    padding: 15px;
+}

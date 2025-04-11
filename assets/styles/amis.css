@@ -37,17 +37,3 @@
     top: var(--page-padding);
     right: var(--page-padding);
 }
-
-.admin-btn{
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-}
-.admin-btn > *{
-    padding: 15px;
-}

@@ -8,7 +8,7 @@
 
 {% block javascripts %}
 {% if is_admin() %}
-<script type="module" src="{{ asset('js/amis_admin.js') }}"></script>
+<script type="module" src="{{ asset('js/confirmDialog.js') }}"></script>
 {% endif %}
 {% endblock %}
 
@@ -40,9 +40,9 @@
                 {% endif %}
                 
                 {% if is_admin() %}
-                    <div class="admin-btn">
-                        <a  class="btn btn-primary" href="{{ path('friend_edit', { id: ami.id }) }}"><span class="material-symbols-outlined">edit</span></a>
-                        <button class="btn btn-danger" delpath="{{ path('friend_delete', { id: ami.id }) }}"><span class="material-symbols-outlined">delete</span></button>
+                    <div class="card-admin-actions">
+                        <a  class="btn btn-primary" href="{{ path('friend_edit', { id: ami.id }) }}"><span>edit</span></a>
+                        <button class="btn btn-danger confirmDialog" action="{{ path('friend_delete', { id: ami.id }) }}"><span>delete</span></button>
                     </div>
                 {% endif %}
 

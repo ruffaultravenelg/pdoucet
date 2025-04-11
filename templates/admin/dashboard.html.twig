@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion Admin{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/dashboard.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <h1>Tableau de bord</h1>
+    <p class="subtitle">Gerer le contenu du site web</p>
+
+
+    <a href="{{ path('content') }}" class="btn btn-primary">Modifier les textes statiques</a>
+
+</main>
+
+{% endblock %}

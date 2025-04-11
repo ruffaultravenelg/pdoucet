@@ -17,6 +17,11 @@ final class AdminController extends AbstractController
     #[Route('/login', name: 'login', methods: ['GET', 'POST'])]
     public function login(Request $request, SessionInterface $session): Response
     {
+
+        if ($session->has('is_admin') && $session->get('is_admin')) {
+            return $this->redirectToRoute('index');
+        }
+
         $adminPath = $_ENV['ADMIN_PATH'];
 
         if ($request->isMethod('POST')) {
@@ -28,10 +33,6 @@ final class AdminController extends AbstractController
             } else {
                 $this->addFlash('error', 'Mot de passe incorrect');
             }
-        }
-
-        if ($session->has('is_admin') && $session->get('is_admin')) {
-            return $this->redirectToRoute('index');
         }
 
         return $this->render('admin/login.html.twig');
@@ -84,7 +85,18 @@ final class AdminController extends AbstractController
 
         return new Response('Content not found', 404);
     }
-
-
+ 
+    #[Route('/dashboard', name: 'dashboard')]
+    public function dashboard(Request $request, AdminService $adminService, SessionInterface $session): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+       
+        // Render page
+        return $this->render('admin/dashboard.html.twig');
     
+    }
+
 }

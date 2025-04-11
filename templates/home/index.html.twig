@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
 {% endblock %}
 
+{% block javascripts %}
+    <script type="module" src="{{ asset('js/confirmDialog.js') }}"></script>
+{% endblock %}
+
 {% block body %}
 
 <!-- LANDING -->
@@ -59,11 +63,17 @@
 
     <div id="heart_container">
 
+        {% if is_admin() %}
+            <div class="heart-card add" onclick="window.location='{{ path('heartpic_create') }}'">
+                <img src="{{ asset('images/create_heartpic.png') }}" alt="Ajouter un nouveau coup de coeur"/>
+            </div>
+        {% endif %}
+
         {% for heartPic in heartPics %}
         <div class="heart-card">
 
             <img src="{{ heartPic.image }}" alt="Image du coup de coeur '{{ heartPic.title }}'"/>
-            <div>
+            <div class="heart-card-content">
                 <div>
                     <p class="heart-card-title">{{ heartPic.title }}</p>
                     {% if heartPic.subtitle %}
@@ -79,6 +89,13 @@
                 <a class="heart-card-action" href="{{ heartPic.link }}" target="_blank">En savoir plus</a>
                 {% endif %}
             </div>
+            
+            {% if is_admin() %}
+                <div class="card-admin-actions">
+                    <a class="btn btn-primary" href="{{ path('heartpic_edit', { id: heartPic.id }) }}"><span>edit</span></a>
+                    <button class="btn btn-danger confirmDialog" action="{{ path('heartpic_delete', { id: heartPic.id }) }}"><span>delete</span></button>
+                </div>
+            {% endif %}
 
         </div>
         {% endfor %}
@@ -97,6 +114,11 @@
             <li><span class="material-symbols-outlined">favorite</span>{{ depeche.text }}</li>
             {% endfor %}
         </ul>
+
+        <!-- CREATE SPACE FOR ADMIN BTN -->
+        {% if is_admin() %}
+            <div style="height: var(--page-padding)"></div>    
+        {% endif %}
     </div>
 
     <div>
@@ -106,17 +128,41 @@
             <li><span class="material-symbols-outlined">sentiment_dissatisfied</span>{{ depeche.text }}</li>
             {% endfor %}
         <ul/>
+        
+        <!-- CREATE SPACE FOR ADMIN BTN -->
+        {% if is_admin() %}
+            <div style="height: var(--page-padding)"></div>    
+        {% endif %}
     </div>
+
+    {% if is_admin() %}
+    <a class="btn btn-secondary-darker add" href=""><span>add</span>Ajouter une dépêche</a>
+    {% endif %}
 
 </section>
 
 <!-- LINKS -->
 <section class="links">
 
+    {% for link in links %}
     <div>
-        <img src="https://picsum.photos/200/200" />
-        <p>Un autre monde</p>
+        <img src="{{ link.image }}" alt="Image d'illustration de la page {{ link.name }}" onclick="window.location='{{ link.url }}'"/>
+        <p onclick="window.location='{{ link.url }}'">{{ link.name }}</p>
+        {% if is_admin() %}
+            <div class="card-admin-actions">
+                <a class="btn btn-primary" href="{{ path('indexlink_edit', { id: link.id }) }}"><span>edit</span></a>
+                <button class="btn btn-danger confirmDialog" action="{{ path('indexlink_delete', { id: link.id }) }}"><span>delete</span></button>
+            </div>
+        {% endif %}
     </div>
+    {% endfor %}
+
+    {% if is_admin() %}
+        <div onclick="window.location='{{ path('indexlink_create') }}'">
+            <img src="{{ asset('images/create_indexlink.png') }}" alt="Créer un nouveau lien" />
+            <p>Créer un nouveau lien</p>
+        </div>
+    {% endif %}
 
 </section>
 
