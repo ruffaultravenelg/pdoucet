@@ -1,0 +1,62 @@
+main{
+    width: 70%;
+    margin: auto;
+}
+main > input, #container{
+    width: 100%;
+}
+
+#container{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card{
+    border: 1px solid var(--color-placeholder);
+    border-radius: 15px;
+    padding: 0 15px;
+
+    overflow-y: hidden;
+    height: calc(1.5rem + 2 * 15px);
+    transition-duration: 0.2s;
+}
+.card-open{
+    height: calc(270px);
+}
+#no-result{
+    font-size: 1rem;
+    color: var(--color-placeholder);
+    text-align: center;
+    display: none; /* trigger by javascript on search */
+}
+
+
+.card > p {
+    font-size: 1rem;
+    margin-top: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    cursor: pointer;
+}
+
+.card-key{
+    font-weight: bold;
+}
+.card-content{
+    width: 100%;
+    margin-top: 25px;
+}
+.card-content label{
+    font-size: 1rem;
+}
+.card-content input{
+    margin-top: 15px;
+    width: 100%;
+}
+.card-content button{
+    margin: 15px 0
+}

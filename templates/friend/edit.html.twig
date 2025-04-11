@@ -7,17 +7,11 @@
 <link rel="stylesheet" href="{{ asset('styles/admin_form.css') }}">
 {% endblock %}
 
-{% block javascripts %}
-{% if app.session.get('is_admin') == true %}
-<script type="module" src="{{ asset('js/amis_admin.js') }}"></script>
-{% endif %}
-{% endblock %}
-
 {% block body %}
 
 <main>
     
-    <h1>Modifier les information de {{friend.fullname}}</h1>
+    <h1>{{friend.fullname}}</h1>
     <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
 
     {{ form_start(form) }}

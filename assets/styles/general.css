@@ -153,6 +153,17 @@ p.subtitle{
     color: var(--color-white);
 }
 
+.btn-small{
+    padding: 15px;
+    gap: 8px;
+}
+.btn-small > span{
+    font-size: 0.7rem;
+}
+.btn-small{
+    font-size: 0.8rem;
+}
+
 /* INPUT */
 .field{
     --main-color: var(--color-primary);

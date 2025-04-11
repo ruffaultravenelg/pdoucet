@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion Admin{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/content.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+<script type="module" src="{{ asset('js/content.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <h1>Content</h1>
+    <p class="subtitle">Modifier les textes statiques</p>
+
+    <input type="text" class="field" id="search" placeholder="index.quote.author" />
+
+    <div id="container">
+
+        {% for elm in content %}
+            <div key-name="{{elm.key}}" class="card">
+
+                <p><span class="card-key">{{ elm.key }} :</span> "{{ elm.content }}"</p>
+
+                <form class="card-content" method="post" action="{{ path('content_update') }}">
+                    <label>Valeur a afficher :</label>
+                    <input type="hidden" name="key" value="{{ elm.key }}" />
+                    <input class="field" type="text" name="content" value="{{ elm.content }}" placeholder="A texte" />
+                    <button class="btn btn-primary btn-small" type="submit"><span>save</span>Modifier</button>
+                </form>
+
+            </div>
+        {% endfor %}
+
+        <p id="no-result">Aucun texte trouvée.</p>
+
+    </div>
+
+</main>
+
+{% endblock %}

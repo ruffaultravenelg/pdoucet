@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Content;
 use App\Service\AdminService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,5 +43,48 @@ final class AdminController extends AbstractController
         $session->clear();
         return $this->redirectToRoute('index');
     }
+
+    #[Route('/content', name: 'content')]
+    public function content(AdminService $adminService, EntityManagerInterface $em): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+
+        // Fetch content from the database
+        $content = $em->getRepository(Content::class)->findAll();
+
+        // Render
+        return $this->render('admin/content.html.twig', [
+            'content' => $content,
+        ]);
+    }
+
+    #[Route('/content/update', name: 'content_update', methods: ['POST'])]
+    public function updateContent(Request $request, AdminService $adminService, EntityManagerInterface $em): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+
+        $contentKey = $request->request->get('key');
+        $contentText = $request->request->get('content');
+
+        // Fetch content from the database
+        $content = $em->getRepository(Content::class)->find($contentKey);
+
+        if ($content) {
+            $content->setContent($contentText);
+            $em->persist($content);
+            $em->flush();
+            return $this->redirectToRoute('content');
+        }
+
+        return new Response('Content not found', 404);
+    }
+
+
     
 }

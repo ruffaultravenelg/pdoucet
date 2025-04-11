@@ -7,12 +7,6 @@
 <link rel="stylesheet" href="{{ asset('styles/admin_form.css') }}">
 {% endblock %}
 
-{% block javascripts %}
-{% if app.session.get('is_admin') == true %}
-<script type="module" src="{{ asset('js/amis_admin.js') }}"></script>
-{% endif %}
-{% endblock %}
-
 {% block body %}
 
 <main>
