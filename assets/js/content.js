@@ -5,9 +5,13 @@ for (const card of cards){
 
     content[card.getAttribute('key-name')] = card;
 
+    // Open card event
     card.getElementsByTagName('p')[0].onclick = () => {
         card.classList.toggle('card-open');
     }
+
+    // Update value event
+    card.getElementsByTagName('button')
 
 }
 

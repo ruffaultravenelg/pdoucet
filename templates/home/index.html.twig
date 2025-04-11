@@ -8,6 +8,7 @@
 
 {% block body %}
 
+<!-- LANDING -->
 <section class="landing">
 
     <h1>{{ content('index.quote') }}</h1>
@@ -15,6 +16,7 @@
 
 </section>
 
+<!-- PERSENTATION -->
 <section class="presentation">
 
     <h3>10/04/2025</h3>
@@ -30,6 +32,90 @@
     <div class="rightbar">
         <p>{{ content('fullname') }}</p>
         <img src="{{ asset('images/portrait.png') }}" alt="Pascal Doucet" />
+    </div>
+
+</section>
+
+<!-- RECENT ARTICLES -->
+<section class="last-article">
+
+    <h3>Dernier article</h3>
+    <h2>L'importances des arbres en millieu urbain</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+
+    <div class="section-actions">
+        <button class="btn btn-primary">Continuer de lire</button>
+    </div>
+
+</section>
+
+<!-- COUPS DE CŒUR -->
+<section class="heart">
+
+    <h3>Coups de cœur du moment</h3>
+    <h2>Coups de cœur</h2>
+
+    <div id="heart_container">
+
+        {% for heartPic in heartPics %}
+        <div class="heart-card">
+
+            <img src="{{ heartPic.image }}" alt="Image du coup de coeur '{{ heartPic.title }}'"/>
+            <div>
+                <div>
+                    <p class="heart-card-title">{{ heartPic.title }}</p>
+                    {% if heartPic.subtitle %}
+                    <p class="heart-card-subtitle">{{ heartPic.subtitle }}</p>
+                    {% endif %}
+                </div>
+                {% if heartPic.text %}
+                <p class="heart-card-text">
+                    {{ heartPic.text }}
+                </p>
+                {% endif %}
+                {% if heartPic.link %}
+                <a class="heart-card-action" href="{{ heartPic.link }}" target="_blank">En savoir plus</a>
+                {% endif %}
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- DEPECHE -->
+<section class="depeche">
+
+    <div>
+        <p class="depeche-title">Les <span>bonnes</span> nouvelles</p>
+        <ul>
+            {% for depeche in positiveDepeches %}
+            <li><span class="material-symbols-outlined">favorite</span>{{ depeche.text }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <p class="depeche-title">Les <span>mauvaises</span> nouvelles</p>
+        <ul>
+            {% for depeche in positiveDepeches %}
+            <li><span class="material-symbols-outlined">sentiment_dissatisfied</span>{{ depeche.text }}</li>
+            {% endfor %}
+        <ul/>
+    </div>
+
+</section>
+
+<!-- LINKS -->
+<section class="links">
+
+    <div>
+        <img src="https://picsum.photos/200/200" />
+        <p>Un autre monde</p>
     </div>
 
 </section>
