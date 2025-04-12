@@ -21,11 +21,15 @@
         {{ form_errors(form.text) }}
     </div>
     
-    <div class="form-field requiered">
+    <div class="form-switch-field requiered">
         {{ form_label(form.is_positive) }}
-        {{ form_widget(form.is_positive) }}
+        <label class="field-switch">
+            {{ form_widget(form.is_positive) }}
+            <span class="field-switch-slider"></span>
+        </label>
         {{ form_errors(form.is_positive) }}
     </div>
+    
     
     <div class="form-actions">
         <a href="{{ path('index') }}" class="btn btn-secondary">Annuler</a>

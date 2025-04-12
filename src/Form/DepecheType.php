@@ -26,7 +26,7 @@ class DepecheType extends AbstractType
             ->add('is_positive', CheckboxType::class, [
                 'label' => 'Bonne nouvelle',
                 'attr' => [
-                    'class' => 'field',
+                    'class' => 'field-switch',
                 ],
                 'required' => false,
             ])

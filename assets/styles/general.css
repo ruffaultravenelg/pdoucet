@@ -187,6 +187,66 @@ p.subtitle{
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), transparent 60%);
 }
 
+/* CHECKBOX */
+.field-switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 32px;
+}
+
+.field-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.field-switch-slider {
+    --main-color: var(--color-primary);
+    position: absolute;
+    cursor: pointer;
+    background-color: var(--color-whitesmoke);
+    border: 3px solid transparent;
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.2s;
+}
+
+.field-switch-slider::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 5px;
+    background-color: var(--color-black);
+    transition: 0.2s;
+}
+
+/* checked state */
+.field-switch input:checked + .field-switch-slider {
+    background-color: var(--main-color);
+    border: 3px solid var(--main-color);
+}
+
+.field-switch input:checked + .field-switch-slider::before {
+    transform: translateX(26px);
+    background-color: var(--color-whitesmoke);
+}
+
+/* focus / hover states */
+.field-switch input:focus + .field-switch-slider,
+.field-switch input:hover + .field-switch-slider {
+    border: 3px solid color-mix(in srgb, var(--main-color), transparent 10%);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), transparent 60%);
+}
+
+
+
 /* FOOTER */
 footer{
     width: 100%;
