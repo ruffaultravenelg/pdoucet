@@ -23,7 +23,9 @@
         {% for ami in amis %}
             <div class="friend">
 
-                <img src="{{ ami.avatarUrl | default('https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcQrJzSTI4OI2aLe6DgXajqOO5E87Z3nGiTCZcn_-Q9xqZ_CLtLNLeYib4xxZUSGZgzb') }}" alt="Photo de {{ ami.fullname }}" class="avatar" />
+                {% if ami.avatarFilename %}
+                    <img src="{{ url(ami.avatarFilename) }}" alt="Photo de {{ ami.fullname }}" class="avatar" />
+                {% endif %}
 
                 <p class="fullname">{{ ami.fullname }}</p>
 

@@ -4,11 +4,13 @@ namespace App\Form;
 
 use App\Entity\Friend;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints\File;
 
 class FriendType extends AbstractType
 {
@@ -33,13 +35,25 @@ class FriendType extends AbstractType
                     'maxlength' => 255,
                     'class' => 'field',
                 ],
+                'required' => false,
             ])
-            ->add('avatar_url', TextType::class, [
-                'label' => 'URL de l\'avatar',
+            ->add('avatar', FileType::class, [
+                'label' => $options['avatar_label'],
                 'attr' => [
-                    'placeholder' => 'URL de l\'avatar',
-                    'maxlength' => 255,
                     'class' => 'field',
+                ],
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG, PNG, GIF ou WebP)',
+                    ])
                 ],
             ])
             ->add('website_url', TextType::class, [
@@ -49,6 +63,7 @@ class FriendType extends AbstractType
                     'maxlength' => 255,
                     'class' => 'field',
                 ],
+                'required' => false,
             ])
             ->add('facebook_url', TextType::class, [
                 'label' => 'URL Facebook',
@@ -57,6 +72,7 @@ class FriendType extends AbstractType
                     'maxlength' => 255,
                     'class' => 'field',
                 ],
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => $options['submit_label'],
@@ -68,7 +84,8 @@ class FriendType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Friend::class,
-            'submit_label' => 'Valider'
+            'submit_label' => 'Valider',
+            'avatar_label' => "Modifier l'image"
         ]);
     }
 }

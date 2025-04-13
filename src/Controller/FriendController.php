@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Friend;
 use App\Form\FriendType;
 use App\Service\AdminService;
+use App\Service\FileHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ final class FriendController extends AbstractController
     
 
     #[Route('/ami/create', name: 'friend_create')]
-    public function create(EntityManagerInterface $em, AdminService $adminService, Request $request): Response
+    public function create(EntityManagerInterface $em, AdminService $adminService, Request $request, FileHandler $fileHandler): Response
     {
         // Check permission
         if (!$adminService->isAdmin()) {
@@ -47,11 +48,18 @@ final class FriendController extends AbstractController
         }
 
         $friend = new Friend();
-        $form = $this->createForm(FriendType::class, $friend, ['submit_label' => 'Ajouter']);
+        $form = $this->createForm(FriendType::class, $friend, ['submit_label' => 'Ajouter', 'avatar_label' => 'Ajouter une photo']);
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handle file upload
+            $avatarFile = $form->get('avatar')->getData();
+            if ($avatarFile) {
+                $filename = $fileHandler->upload($avatarFile);
+                $friend->setAvatarFilename($filename);
+            }
 
             $em->persist($friend);
             $em->flush();
@@ -68,7 +76,7 @@ final class FriendController extends AbstractController
     }
 
     #[Route('/ami/{id}/edit', name: 'friend_edit')]
-    public function edit(EntityManagerInterface $em, AdminService $adminService, Request $request, Friend $friend): Response
+    public function edit(EntityManagerInterface $em, AdminService $adminService, Request $request, Friend $friend, FileHandler $fileHandler): Response
     {
         // Check permission
         if (!$adminService->isAdmin()) {
@@ -80,6 +88,14 @@ final class FriendController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handle file upload
+            $avatarFile = $form->get('avatar')->getData();
+            if ($avatarFile) {
+                $filename = $fileHandler->upload($avatarFile);
+                $friend->setAvatarFilename($filename);
+            }
+
             $em->flush();
 
             return $this->redirectToRoute('friends');

@@ -13,7 +13,7 @@ class FriendFixtures extends Fixture
         $friend1 = new Friend();
         $friend1->setFullname('John Doe');
         $friend1->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
-        $friend1->setAvatarUrl('https://picsum.photos/200');
+        $friend1->setAvatarFilename('friend1.jpg');
         $friend1->setWebsiteUrl('https://example.com');
         $friend1->setFacebookUrl('https://facebook.com/johndoe');
         $manager->persist($friend1);
@@ -25,7 +25,7 @@ class FriendFixtures extends Fixture
         $friend3 = new Friend();
         $friend3->setFullname('Alice Johnson');
         $friend3->setDescription('Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
-        $friend3->setAvatarUrl('https://picsum.photos/200');
+        $friend3->setAvatarFilename('friend3.jpg');
         $manager->persist($friend3);
 
         $friend4 = new Friend();

@@ -20,7 +20,7 @@ class Friend
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $avatar_url = null;
+    private ?string $avatar_filename = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $website_url = null;
@@ -57,14 +57,14 @@ class Friend
         return $this;
     }
 
-    public function getAvatarUrl(): ?string
+    public function getAvatarFilename(): ?string
     {
-        return $this->avatar_url;
+        return $this->avatar_filename;
     }
 
-    public function setAvatarUrl(?string $avatar_url): static
+    public function setAvatarFilename(?string $avatar_filename): static
     {
-        $this->avatar_url = $avatar_url;
+        $this->avatar_filename = $avatar_filename;
 
         return $this;
     }

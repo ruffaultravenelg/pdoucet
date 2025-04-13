@@ -169,12 +169,12 @@ p.subtitle{
     --main-color: var(--color-primary);
     background-color: var(--color-whitesmoke);
     color: var(--color-black);
-    padding: 20px;
+    padding: 17px;
     border-radius: 14px;
     border: 3px solid transparent;
     gap: 10px;
     outline: none;
-    font-size: 1rem;
+    font-size: 0.9rem;
     transition-duration: 0.2s;
 }
 .field::placeholder{
@@ -186,6 +186,31 @@ p.subtitle{
 .field:focus, .field:active{
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), transparent 60%);
 }
+
+.field[type="file"] {
+    padding: 10px;
+}
+
+.field[type="file"]::file-selector-button {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.field[type="file"]::file-selector-button:hover {
+    background-color: color-mix(in srgb, var(--color-primary), black 10%);
+}
+
+.field[type="file"]::file-selector-button:active {
+    background-color: color-mix(in srgb, var(--color-primary), black 20%);
+}
+
 
 /* CHECKBOX */
 .field-switch {
@@ -244,8 +269,6 @@ p.subtitle{
     border: 3px solid color-mix(in srgb, var(--main-color), transparent 10%);
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), transparent 60%);
 }
-
-
 
 /* FOOTER */
 footer{
@@ -307,4 +330,6 @@ footer a:hover, footer a:focus{
 }
 .card-admin-actions > *{
     padding: 15px;
+    max-width: 50px;
+    max-height: 50px;
 }
