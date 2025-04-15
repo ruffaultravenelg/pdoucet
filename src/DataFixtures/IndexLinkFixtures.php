@@ -13,20 +13,14 @@ class IndexLinkFixtures extends Fixture
         $link1 = new IndexLink();
         $link1->setName('Amis');
         $link1->setUrl('/amis');
-        $link1->setImage('https://picsum.photos/200');
+        $link1->setImage('link_amis.png');
         $manager->persist($link1);
 
         $link2 = new IndexLink();
-        $link2->setName('Liens');
-        $link2->setUrl('/liens');
-        $link2->setImage('https://picsum.photos/200');
+        $link2->setName('Crevette');
+        $link2->setUrl('/crevette');
+        $link2->setImage('crevette.gif');
         $manager->persist($link2);
-
-        $link3 = new IndexLink();
-        $link3->setName('Contact');
-        $link3->setUrl('/contact');
-        $link3->setImage('https://picsum.photos/200');
-        $manager->persist($link3);
 
         $manager->flush();
     }

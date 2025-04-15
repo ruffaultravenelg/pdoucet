@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script type="module" src="{{ asset('js/confirmDialog.js') }}"></script>
+    <script type="module" src="js/confirmDialog.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -72,7 +72,7 @@
         {% for heartPic in heartPics %}
         <div class="heart-card">
 
-            <img src="{{ heartPic.image }}" alt="Image du coup de coeur '{{ heartPic.title }}'"/>
+            <img src="{{ url(heartPic.image) }}" alt="Image du coup de coeur '{{ heartPic.title }}'"/>
             <div class="heart-card-content">
                 <div>
                     <p class="heart-card-title">{{ heartPic.title }}</p>
@@ -146,7 +146,7 @@
 
     {% for link in links %}
     <div>
-        <img src="{{ link.image }}" alt="Image d'illustration de la page {{ link.name }}" onclick="window.location='{{ link.url }}'"/>
+        <img src="{{ url(link.image) }}" alt="Image d'illustration de la page {{ link.name }}" onclick="window.location='{{ link.url }}'"/>
         <p onclick="window.location='{{ link.url }}'">{{ link.name }}</p>
         {% if is_admin() %}
             <div class="card-admin-actions">
