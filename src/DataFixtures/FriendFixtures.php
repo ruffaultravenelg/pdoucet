@@ -18,19 +18,16 @@ class FriendFixtures extends Fixture
         $friend1->setFacebookUrl('https://facebook.com/johndoe');
         $manager->persist($friend1);
 
-        $friend2 = new Friend();
-        $friend2->setFullname('Jane Smith');
-        $manager->persist($friend2);
-
         $friend3 = new Friend();
         $friend3->setFullname('Alice Johnson');
         $friend3->setDescription('Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
-        $friend3->setAvatarFilename('friend3.jpg');
+        $friend3->setAvatarFilename('friend2.jpg');
         $manager->persist($friend3);
 
         $friend4 = new Friend();
         $friend4->setFullname('Bob Brown');
         $friend4->setWebsiteUrl('https://bobbrown.com');
+        $friend4->setAvatarFilename('friend3.jpg');
         $manager->persist($friend4);
 
         $manager->flush();

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Depeche;
 use App\Entity\HeartPic;
 use App\Entity\IndexLink;
@@ -36,7 +37,6 @@ final class HomeController extends AbstractController
             ['date' => 'DESC'],
             7
         );
-
         $negativeDepeches = $em->getRepository(Depeche::class)->findBy(
             ['is_positive' => false],
             ['date' => 'DESC'],
@@ -46,15 +46,86 @@ final class HomeController extends AbstractController
         // Get links
         $links = $em->getRepository(IndexLink::class)->findAll();
 
+        // Get last article
+        $lastArticle = $em->getRepository(Article::class)->findOneBy([], ['date_modifed' => 'DESC']);
+        if ($lastArticle) {
+            $lastArticle = [
+                'id' => $lastArticle->getId(),
+                'title' => $lastArticle->getTitle(),
+                'text' => $this->truncateHtml($lastArticle->getContent()),
+            ];
+        }
+
         // Render
         return $this->render('home/index.html.twig', [
             'heartPics' => $heartPic,
             'positiveDepeches' => $positiveDepeches,
             'negativeDepeches' => $negativeDepeches,
             'links' => $links,
+            'lastArticle' => $lastArticle,
         ]);
 
     }
+
+    function truncateHtml($text, $maxLength = 200) {
+        $printedLength = 0;
+        $position = 0;
+        $tags = [];
+    
+        $result = '';
+    
+        // Regex pour capturer les tags et le texte
+        $regex = '/(<[^>]+>|[^<]+)/';
+    
+        preg_match_all($regex, $text, $tokens);
+    
+        foreach ($tokens[0] as $token) {
+            if ($token[0] === '<') {
+                // C'est une balise HTML
+                if ($token[1] === '/') {
+                    // Balise fermante
+                    array_pop($tags);
+                    $result .= $token;
+                } else {
+                    // Balise ouvrante ou auto-fermante
+                    // Vérifie si c'est une balise auto-fermante
+                    if (preg_match('/<(\w+)[^>]*\/>/', $token)) {
+                        $result .= $token;
+                    } else {
+                        // Balise ouvrante normale
+                        preg_match('/<(\w+)/', $token, $tagName);
+                        $tags[] = $tagName[1];
+                        $result .= $token;
+                    }
+                }
+            } else {
+                // C'est du texte
+                $remaining = $maxLength - $printedLength;
+    
+                if (strlen($token) > $remaining) {
+                    $result .= substr($token, 0, $remaining);
+                    $printedLength += $remaining;
+                    break;
+                } else {
+                    $result .= $token;
+                    $printedLength += strlen($token);
+                }
+            }
+    
+            if ($printedLength >= $maxLength) {
+                break;
+            }
+        }
+    
+        // Ferme les balises ouvertes restantes
+        while (!empty($tags)) {
+            $tag = array_pop($tags);
+            $result .= "</$tag>";
+        }
+    
+        return $result;
+    }
+    
 
     ///////////////////
     //// HEART PIC ////
