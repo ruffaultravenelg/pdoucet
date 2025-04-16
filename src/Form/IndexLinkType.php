@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\IndexLink;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class IndexLinkType extends AbstractType
 {
@@ -21,11 +23,23 @@ class IndexLinkType extends AbstractType
                     'class' => 'field',
                 ],
             ])
-            ->add('image', TextType::class, [
-                'label' => 'Image',
+            ->add('image', FileType::class, [
+                'label' => $options['image_label'],
                 'attr' => [
-                    'placeholder' => 'articles.png',
                     'class' => 'field',
+                ],
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG, PNG, GIF ou WebP)',
+                    ])
                 ],
             ])
             ->add('url', TextType::class, [
@@ -45,7 +59,8 @@ class IndexLinkType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => IndexLink::class,
-            'submit_label' => 'Valider'
+            'submit_label' => 'Valider',
+            'image_label' => "Modifier l'image"
         ]);
     }
 }

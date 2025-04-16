@@ -13,7 +13,7 @@ class FileExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('url', [$this->fileHandler, 'url']),
+            new TwigFunction('file', [$this->fileHandler, 'url']),
         ];
     }
 }

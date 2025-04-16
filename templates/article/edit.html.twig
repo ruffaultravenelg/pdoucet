@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un article{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/admin_form.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<main>
+    
+    <h1>Modifier un article</h1>
+    <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
+
+    {{ form_start(form) }}
+    
+    <div class="form-field requiered">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.subtitle) }}
+        {{ form_widget(form.subtitle) }}
+        {{ form_errors(form.subtitle) }}
+    </div>
+    <div class="form-field">
+        {{ form_label(form.tags) }}
+        {{ form_widget(form.tags) }}
+        {{ form_errors(form.tags) }}
+    </div>
+    
+    <div class="form-field requiered">
+        {{ form_label(form.author) }}
+        {{ form_widget(form.author) }}
+        {{ form_errors(form.author) }}
+    </div>
+    
+    <div class="form-switch-field">
+        {{ form_label(form.visible) }}
+        <label class="field-switch">
+            {{ form_widget(form.visible) }}
+            <span class="field-switch-slider"></span>
+        </label>
+        {{ form_errors(form.visible) }}
+    </div>
+
+    <div class="form-actions">
+        <a href="{{ path('article', {id: articleId}) }}" class="btn btn-secondary">Annuler</a>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    
+    {{ form_end(form) }}
+
+</main>
+
+{% endblock %}

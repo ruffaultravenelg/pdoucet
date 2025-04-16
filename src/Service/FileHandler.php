@@ -27,6 +27,13 @@ class FileHandler
         return $fileName;
     }
 
+    public function delete(string $filename){
+        $path = $this->url($filename);
+        if (file_exists($path)){
+            unlink($path);
+        }
+    }
+
     public function url(string $filename): string
     {
         return $this->publicPath . '/' . $filename;

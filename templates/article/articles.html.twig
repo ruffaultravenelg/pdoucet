@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/articles.css') }}">
+{% endblock %}
+
+{% block body %}
+<main>
+
+    <h1>Articles</h1>
+    <p class="subtitle">Liste des articles</h2>
+
+    <div class="articles-container">
+        {% for article in articles %}
+
+            <a class="article-card" href="{{ path('article', {id: article.id}) }}">
+                <p class="article-card-date">{{ article.dateCreated | date('d/m/Y') }}</p>
+                <p class="article-card-title">{{ article.title }}</p>
+                <p class="article-card-subtitle">{{ article.subtitle }}</p>
+            </a>
+
+        {% endfor %}
+    </div>
+
+    {% if hiddenArticles is not empty %} <!-- hiddenArticles is alway empty when not admin -->
+    <p class="hidden-articles">Articles cachés</p>
+    <div class="articles-container">
+        {% for article in hiddenArticles %}
+
+            <a class="article-card hidden" href="{{ path('article', {id: article.id}) }}">
+                <p class="article-card-date">{{ article.dateCreated | date('d/m/Y') }}</p>
+                <p class="article-card-title">{{ article.title }}</p>
+                <p class="article-card-subtitle">{{ article.subtitle }}</p>
+            </a>
+
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if is_admin() %}
+        <a class="btn btn-primary" id="new_article" href="{{ path('article_create') }}"><span>post_add</span></a>
+    {% endif %}
+
+</main>
+{% endblock %}

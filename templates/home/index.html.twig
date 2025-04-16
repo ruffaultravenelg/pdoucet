@@ -72,7 +72,7 @@
         {% for heartPic in heartPics %}
         <div class="heart-card">
 
-            <img src="{{ url(heartPic.image) }}" alt="Image du coup de coeur '{{ heartPic.title }}'"/>
+            <img src="{{ file(heartPic.image) }}" alt="Image du coup de coeur '{{ heartPic.title }}'"/>
             <div class="heart-card-content">
                 <div>
                     <p class="heart-card-title">{{ heartPic.title }}</p>
@@ -111,7 +111,12 @@
         <p class="depeche-title">Les <span>bonnes</span> nouvelles</p>
         <ul>
             {% for depeche in positiveDepeches %}
-            <li><span class="material-symbols-outlined">favorite</span>{{ depeche.text }}</li>
+            <li>
+                <span class="material-symbols-outlined">favorite</span>{{ depeche.text }}
+                {% if is_admin() %}
+                <a href=" {{ path('depeche_delete', {id: depeche.id}) }}" class="material-symbols-outlined">delete</a>
+                {% endif %}
+            </li>
             {% endfor %}
         </ul>
 
@@ -125,7 +130,12 @@
         <p class="depeche-title">Les <span>mauvaises</span> nouvelles</p>
         <ul>
             {% for depeche in negativeDepeches %}
-            <li><span class="material-symbols-outlined">sentiment_dissatisfied</span>{{ depeche.text }}</li>
+            <li>
+                <span class="material-symbols-outlined">sentiment_dissatisfied</span>{{ depeche.text }}
+                {% if is_admin() %}
+                <a href=" {{ path('depeche_delete', {id: depeche.id}) }}" class="material-symbols-outlined">delete</a>
+                {% endif %}
+            </li>
             {% endfor %}
         <ul/>
         
@@ -146,7 +156,7 @@
 
     {% for link in links %}
     <div>
-        <img src="{{ url(link.image) }}" alt="Image d'illustration de la page {{ link.name }}" onclick="window.location='{{ link.url }}'"/>
+        <img src="{{ file(link.image) }}" alt="Image d'illustration de la page {{ link.name }}" onclick="window.location='{{ link.url }}'"/>
         <p onclick="window.location='{{ link.url }}'">{{ link.name }}</p>
         {% if is_admin() %}
             <div class="card-admin-actions">

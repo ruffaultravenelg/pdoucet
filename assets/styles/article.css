@@ -1,0 +1,38 @@
+.content{
+    width: 100%;
+}
+
+.visibility_info{
+    color: rgb(55, 133, 221);
+    background-color: rgba(55, 133, 221, 0.2);
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 5px;
+    gap: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 40%;
+}
+.visibility_info span{
+    font-size: 1.2rem;
+}
+
+.author{
+    text-align: right;
+    color: var(--color-primary);
+    font-size: 1rem;
+    margin-top: 30px;
+}
+
+.modified{
+    text-align: right;
+    color: var(--color-placeholder);
+    font-size: 0.9rem;
+    margin-top: 10px;
+}

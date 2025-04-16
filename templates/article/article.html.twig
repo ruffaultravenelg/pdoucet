@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/article.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+{% if is_admin() %}
+<script type="module" src="/js/confirmDialog.js"></script>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<main>
+
+    {% if (not article.visible) and is_admin() %}
+    <p class="visibility_info"><span class="material-symbols-outlined">info</span>Cet article n'est pas visible publiquement.</p>
+    {% endif %}
+
+    <h1>{{ article.title }}</h1>
+    <p class="subtitle">{{ article.subtitle }}</h2> 
+
+    <div class="content">
+        {{ article.content | raw }}
+    </div>
+
+    <p class="author">Écrit par {{ article.author }}</p>
+    <p class="modified">Modifié pour la dernière fois le {{ article.dateModifed | date('j/m/Y') }}</p>
+
+    {% if is_admin() %}
+        <div class="card-admin-actions">
+            <a title="Modifier le contenu de l'article" class="btn btn-primary" href="{{ path('article_write', { id: article.id }) }}"><span>edit</span></a>
+            <a title="Modifier les informations de l'article" class="btn btn-primary" href="{{ path('article_edit', { id: article.id }) }}"><span>settings</span></a>
+            <button class="btn btn-danger confirmDialog" action="{{ path('article_delete', { id: article.id }) }}"><span>delete</span></button>
+        </div>
+    {% endif %}
+
+</main>
+
+{% endblock %}

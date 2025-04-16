@@ -9,6 +9,7 @@ use App\Form\DepecheType;
 use App\Form\HeartPicType;
 use App\Form\IndexLinkType;
 use App\Service\AdminService;
+use App\Service\FileHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,7 +76,7 @@ final class HomeController extends AbstractController
 
     // Create
     #[Route('/heartpic/create', name: 'heartpic_create')]
-    public function heartpic_create(EntityManagerInterface $em, AdminService $adminService, Request $request): Response
+    public function heartpic_create(EntityManagerInterface $em, AdminService $adminService, Request $request, FileHandler $fileHandler): Response
     {
         // Check permission
         if (!$adminService->isAdmin()) {
@@ -83,11 +84,20 @@ final class HomeController extends AbstractController
         }
 
         $heartPic = new HeartPic();
-        $form = $this->createForm(HeartPicType::class, $heartPic, ['submit_label' => 'Ajouter']);
+        $form = $this->createForm(HeartPicType::class, $heartPic, ['submit_label' => 'Ajouter', 'image_label' => 'Selectionner une image']);
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handle file upload
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $fileHandler->delete($heartPic->getImage()); // Remove old file if exist
+                $filename = $fileHandler->upload($image);
+                $heartPic->setImage($filename);
+            }
+
             $em->persist($heartPic);
             $em->flush();
             
@@ -103,7 +113,7 @@ final class HomeController extends AbstractController
 
     // Edit
     #[Route('/heartpic/{id}/edit', name: 'heartpic_edit')]
-    public function heartpic_edit(EntityManagerInterface $em, AdminService $adminService, Request $request, HeartPic $heartPic): Response
+    public function heartpic_edit(EntityManagerInterface $em, AdminService $adminService, Request $request, HeartPic $heartPic, FileHandler $fileHandler): Response
     {
         // Check permission
         if (!$adminService->isAdmin()) {
@@ -115,6 +125,15 @@ final class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handle file upload
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $fileHandler->delete($heartPic->getImage()); // Remove old file if exist
+                $filename = $fileHandler->upload($image);
+                $heartPic->setImage($filename);
+            }
+
             $em->flush();
 
             return $this->redirectToRoute('index');
@@ -148,7 +167,7 @@ final class HomeController extends AbstractController
 
     // Create
     #[Route('/indexlink/create', name: 'indexlink_create')]
-    public function indexlink_create(EntityManagerInterface $em, AdminService $adminService, Request $request): Response
+    public function indexlink_create(EntityManagerInterface $em, AdminService $adminService, Request $request, FileHandler $fileHandler): Response
     {
         // Check permission
         if (!$adminService->isAdmin()) {
@@ -156,11 +175,20 @@ final class HomeController extends AbstractController
         }
 
         $indexLink = new IndexLink();
-        $form = $this->createForm(IndexLinkType::class, $indexLink, ['submit_label' => 'Ajouter']);
+        $form = $this->createForm(IndexLinkType::class, $indexLink, ['submit_label' => 'Ajouter', 'image_label' => 'Selectionner une image']);
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handle file upload
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $fileHandler->delete($indexLink->getImage()); // Remove old file if exist
+                $filename = $fileHandler->upload($image);
+                $indexLink->setImage($filename);
+            }
+
             $em->persist($indexLink);
             $em->flush();
             
@@ -176,7 +204,7 @@ final class HomeController extends AbstractController
 
     // Edit
     #[Route('/indexlink/{id}/edit', name: 'indexlink_edit')]
-    public function indexlink_edit(EntityManagerInterface $em, AdminService $adminService, Request $request, IndexLink $indexLink): Response
+    public function indexlink_edit(EntityManagerInterface $em, AdminService $adminService, Request $request, IndexLink $indexLink, FileHandler $fileHandler): Response
     {
         // Check permission
         if (!$adminService->isAdmin()) {
@@ -188,6 +216,15 @@ final class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handle file upload
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $fileHandler->delete($indexLink->getImage()); // Remove old file if exist
+                $filename = $fileHandler->upload($image);
+                $indexLink->setImage($filename);
+            }
+
             $em->flush();
 
             return $this->redirectToRoute('index');

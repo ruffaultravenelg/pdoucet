@@ -33,6 +33,7 @@ class DepecheType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
             ])
+            
         ;
     }
 

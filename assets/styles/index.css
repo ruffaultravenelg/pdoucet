@@ -201,6 +201,11 @@ section.depeche li{
 section.depeche li > span{
     margin-right: 10px;
 }
+section.depeche li > a{
+    text-decoration: none;
+    color: red;
+    margin-left: 10px;
+}
 
 section.depeche a.add{
     position: absolute;

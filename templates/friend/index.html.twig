@@ -24,7 +24,7 @@
             <div class="friend">
 
                 {% if ami.avatarFilename %}
-                    <img src="{{ url(ami.avatarFilename) }}" alt="Photo de {{ ami.fullname }}" class="avatar" />
+                    <img src="{{ file(ami.avatarFilename) }}" alt="Photo de {{ ami.fullname }}" class="avatar" />
                 {% endif %}
 
                 <p class="fullname">{{ ami.fullname }}</p>
