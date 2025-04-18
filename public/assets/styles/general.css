@@ -9,7 +9,7 @@
     --color-black: #000000;
     --color-primary: #1A7941;
 
-    --page-padding: 100px;
+    --page-padding: 7vw;
 }
 
 /* GENERAL STYLE */
@@ -26,6 +26,12 @@ body{
     background-color: var(--color-white);
     color: var(--color-black);
     margin-top: 80px;
+}
+
+@media (max-width: 500px) {
+    html{
+        font-size: 70px !important;
+    }
 }
 
 /* HEADER */
@@ -72,6 +78,23 @@ main{
     padding: var(--page-padding);
     min-height: calc(100vh - 80px - 260px);
     position: relative;
+}
+main.small{
+    width: 50%;
+    margin: auto;
+}
+main.medium{
+    width: 75%;
+    margin: auto;
+}
+
+@media screen and (max-width: 1200px) {
+    main.small{
+        width: 70%;
+    }
+    main.medium{
+        width: 90%;
+    }
 }
 
 h1{
