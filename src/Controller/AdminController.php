@@ -22,7 +22,7 @@ final class AdminController extends AbstractController
             return $this->redirectToRoute('index');
         }
 
-        $adminPath = $_ENV['ADMIN_PATH'];
+        $adminPath = $_ENV['ADMIN_PASS'];
 
         if ($request->isMethod('POST')) {
             $inputPassword = $request->request->get('password');

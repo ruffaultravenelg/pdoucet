@@ -3,7 +3,7 @@
 {% block title %}Accueil{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
+    <link rel="stylesheet" href="/assets/styles/index.css">
 {% endblock %}
 
 {% block javascripts %}
@@ -35,7 +35,7 @@
 
     <div class="rightbar">
         <p>{{ content('fullname') }}</p>
-        <img src="{{ asset('images/portrait.png') }}" alt="Pascal Doucet" />
+        <img src="/assets/images/portrait.png" alt="Pascal Doucet" />
     </div>
 
 </section>
@@ -67,7 +67,7 @@
 
         {% if is_admin() %}
             <div class="heart-card add" onclick="window.location='{{ path('heartpic_create') }}'">
-                <img src="{{ asset('images/create_heartpic.png') }}" alt="Ajouter un nouveau coup de coeur"/>
+                <img src="/assets/images/create_heartpic.png" alt="Ajouter un nouveau coup de coeur"/>
             </div>
         {% endif %}
 
@@ -171,7 +171,7 @@
 
     {% if is_admin() %}
         <div onclick="window.location='{{ path('indexlink_create') }}'">
-            <img src="{{ asset('images/create_indexlink.png') }}" alt="Créer un nouveau lien" />
+            <img src="/assets/images/create_indexlink.png" alt="Créer un nouveau lien" />
             <p>Créer un nouveau lien</p>
         </div>
     {% endif %}
