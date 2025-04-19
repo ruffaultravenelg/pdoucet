@@ -164,7 +164,6 @@ final class HomeController extends AbstractController
             // Handle file upload
             $image = $form->get('image')->getData();
             if ($image) {
-                $fileHandler->delete($heartPic->getImage()); // Remove old file if exist
                 $filename = $fileHandler->upload($image);
                 $heartPic->setImage($filename);
             }
@@ -254,8 +253,7 @@ final class HomeController extends AbstractController
 
             // Handle file upload
             $image = $form->get('image')->getData();
-            if ($image) {
-                $fileHandler->delete($indexLink->getImage()); // Remove old file if exist
+            if ($image != null) {
                 $filename = $fileHandler->upload($image);
                 $indexLink->setImage($filename);
             }
