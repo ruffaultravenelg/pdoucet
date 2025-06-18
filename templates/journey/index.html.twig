@@ -24,6 +24,10 @@
 
     <div id="map" class="test"></div>
 
+    {% if is_admin() %}
+        <a class="btn btn-primary" id="journey_add" href="{{ path('journey_new') }}"><span>add</span>Ajouter une étape</a>
+    {% endif %}
+
     {% for journey in journeys %}
     <div class="journey" data-address="{{ journey.address }}" data-la="{{ journey.la }}" data-lo="{{ journey.lo }}">
         <p class="journey-date">{{ journey.date | date('d/m/Y') }}</p>
@@ -31,12 +35,6 @@
         <p class="journey-description">{{ journey.description }}</p>
     </div>
     {% endfor %}
-    
-    <!--
-    {% if is_admin() %}
-        <a class="btn btn-primary" id="person_add" href="{{ path('friend_create') }}"><span>person_add</span></a>
-    {% endif %}
-    -->
 
 </main>
 

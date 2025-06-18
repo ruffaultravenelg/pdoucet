@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une étape{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/admin_form.css">
+{% endblock %}
+
+{% block body %}
+
+<main>
+    
+    <h1>Ajouter une étape de voyage</h1>
+    <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
+
+    {{ form_start(form) }}
+
+    <div class="form-field requiered">
+        {{ form_label(form.date) }}
+        {{ form_widget(form.date) }}
+        {{ form_errors(form.date) }}
+    </div>
+
+    <div class="form-field requiered">
+        {{ form_label(form.location) }}
+        {{ form_widget(form.location) }}
+        {{ form_errors(form.location) }}
+    </div>
+
+    <div class="form-field">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <div class="form-field">
+        {{ form_label(form.address) }}
+        {{ form_widget(form.address) }}
+        {{ form_errors(form.address) }}
+    </div>
+
+    <div class="form-field">
+        {{ form_label(form.lo) }}
+        {{ form_widget(form.lo) }}
+        {{ form_errors(form.lo) }}
+    </div>
+
+    <div class="form-field">
+        {{ form_label(form.la) }}
+        {{ form_widget(form.la) }}
+        {{ form_errors(form.la) }}
+    </div>
+    
+    <div class="form-actions">
+        <a href="{{ path('journey') }}" class="btn btn-secondary">Annuler</a>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    
+    {{ form_end(form) }}
+
+</main>
+
+{% endblock %}
