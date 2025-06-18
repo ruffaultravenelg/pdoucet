@@ -1,0 +1,12 @@
+.loc-container{
+    display: flex;
+    gap: 30px;
+}
+.loc-container > *{
+    width: 100%;
+}
+.loc-info{
+    font-size: 0.9em;
+    color: var(--color-placeholder);
+    margin-bottom: 30px;
+}

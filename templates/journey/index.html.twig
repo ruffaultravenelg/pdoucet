@@ -22,7 +22,9 @@
     <h1>Carnet de voyage</h1>
     <p class="subtitle">Suivez mes déplacements et aventures !</p>
 
-    <div id="map" class="test"></div>
+    <div id="map" class="map"></div>
+    <div id="map_loader" class="map"><div class="flex-container"><div class="map-loader"></div></div></div>
+    <div id="map_not_found" class="map"><div class="flex-container">Impossible de trouver la localisation</div></div>
 
     {% if is_admin() %}
         <a class="btn btn-primary" id="journey_add" href="{{ path('journey_new') }}"><span>add</span>Ajouter une étape</a>
@@ -33,6 +35,14 @@
         <p class="journey-date">{{ journey.date | date('d/m/Y') }}</p>
         <p class="journey-location">{{ journey.location }}</p>
         <p class="journey-description">{{ journey.description }}</p>
+
+        {% if is_admin() %}
+        <div class="card-admin-actions">
+            <a class="btn btn-primary" href="{{ path('journey_edit', { id: journey.id }) }}"><span>edit</span></a>
+            <button class="btn btn-danger confirmDialog" action="{{ path('journey_delete', { id: journey.id }) }}"><span>delete</span></button>
+        </div>
+        {% endif %}
+        
     </div>
     {% endfor %}
 

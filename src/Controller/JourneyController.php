@@ -55,4 +55,42 @@ final class JourneyController extends AbstractController
         
     }
 
+    #[Route('/journey/{id}/edit', name: 'journey_edit')]
+    public function edit(EntityManagerInterface $em, AdminService $adminService, Request $request, Journey $journey): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+        
+        $form = $this->createForm(JourneyType::class, $journey, ['submit_label' => 'Modifier']);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->redirectToRoute('journey');
+        }
+
+        // Render page
+        return $this->render('journey/edit.html.twig', [
+            'form' => $form,
+        ]);
+        
+    }
+
+    #[Route('/journey/{id}/delete', name: 'journey_delete')]
+    public function delete(EntityManagerInterface $em, Journey $journey, AdminService $adminService): Response
+    {
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+
+        $em->remove($journey);
+        $em->flush();
+
+        return $this->redirectToRoute('journey');
+    }
+
 }
