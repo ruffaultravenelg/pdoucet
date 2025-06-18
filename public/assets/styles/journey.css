@@ -1,0 +1,61 @@
+#map{
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto;
+    height: 500px;
+    border: 2px solid var(--placeholder);
+    margin-bottom: 60px;
+    z-index: 2;
+}
+
+.journey{
+    padding: 20px 40px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+.journey::before{
+    content: '';
+    height: 100%;
+    width: 4px;
+    background-color: var(--color-primary);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.journey::after{
+    content: '';
+    height: 15px;
+    width: 15px;
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-white);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(-15px / 2);
+    transition: transform 0.3s ease-in-out;
+}
+.journey:hover::after{
+    transform: translateY(-50%) scale(1.3);
+}
+
+.journey-date{
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+.journey-location{
+    color: var(--color-black);
+    font-size: 1.4rem;
+    font-weight: normal;
+}
+
+.journey-description{
+    color: var(--color-black);
+    font-size: 1rem;
+    font-weight: normal;
+}

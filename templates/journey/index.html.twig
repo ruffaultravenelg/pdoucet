@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carnet de voyage{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="/assets/styles/journey.css">
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/assets/js/journey.js"></script>
+{% if is_admin() %}
+<script type="module" src="/assets/js/confirmDialog.js"></script>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+
+<main>
+    
+    <h1>Carnet de voyage</h1>
+    <p class="subtitle">Suivez mes déplacements et aventures !</p>
+
+    <div id="map" class="test"></div>
+
+    {% for journey in journeys %}
+    <div class="journey" data-address="{{ journey.address }}" data-la="{{ journey.la }}" data-lo="{{ journey.lo }}">
+        <p class="journey-date">{{ journey.date | date('d/m/Y') }}</p>
+        <p class="journey-location">{{ journey.location }}</p>
+        <p class="journey-description">{{ journey.description }}</p>
+    </div>
+    {% endfor %}
+    
+    <!--
+    {% if is_admin() %}
+        <a class="btn btn-primary" id="person_add" href="{{ path('friend_create') }}"><span>person_add</span></a>
+    {% endif %}
+    -->
+
+</main>
+
+{% endblock %}
