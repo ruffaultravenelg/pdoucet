@@ -39,6 +39,12 @@ section.landing > *{
     color: white;
 }
 
+@media screen and (max-width: 850px) {
+    section.landing{
+        height: calc(100vh - 80px);
+    }
+}
+
 /* SECTION PRESENTATION */
 section.presentation{
     background-color: white;
@@ -55,7 +61,6 @@ section.presentation > p{
     position: absolute;
     top: var(--page-padding);
     right: 0;
-    bottom: var(--page-padding);
     padding: 30px;
     background-color: var(--color-primary);
     border-radius: 30px 0 0 30px;
@@ -74,6 +79,30 @@ section.presentation > p{
 .rightbar > img{
     width: calc(var(--rightbar-width) - 60px);
     border-radius: 15px;
+}
+
+@media screen and (max-width: 850px) {
+    section.presentation{
+        padding-right: var(--page-padding) !important;
+        text-align: justify;
+    }
+    .rightbar{
+        position: initial;
+        width: 100%;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .rightbar > p{
+        width: 100%;
+        color: var(--color-black);
+        text-align: center;
+    }
+    .rightbar > img{
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 /* SECTION last-article */
@@ -209,9 +238,23 @@ section.depeche li > a{
 
 section.depeche a.add{
     position: absolute;
-    bottom: var(--page-padding);
+    bottom: calc(var(--page-padding) / 2);
     left: 50%;
     transform: translateX(-50%);
+}
+
+@media screen and (max-width: 850px) {
+    section.depeche{
+        flex-direction: column;
+        text-align: center;
+    }
+    section.depeche a.add{
+        position: initial;
+        margin-top: 20px;
+        width: 100%;
+        text-align: center;
+        transform: none;
+    }
 }
 
 /* LINKS */

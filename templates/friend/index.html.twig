@@ -30,7 +30,7 @@
                 <p class="fullname">{{ ami.fullname }}</p>
 
                 {% if ami.description %}
-                    <p class="description">{{ ami.description }}</p>
+                    <p class="description">{{ ami.description | raw }}</p>
                 {% endif %}
 
                 {% if ami.websiteUrl %}

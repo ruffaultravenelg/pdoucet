@@ -15,10 +15,14 @@ class Content
     #[ORM\Column(length: 2040)]
     private ?string $content = null;
 
-    public function __construct(string $key, string $content)
+    #[ORM\Column(length: 16)]
+    private ?string $type = null;
+
+    public function __construct(string $key, string $content, ?string $type = 'string')
     {
         $this->key = $key;
         $this->content = $content;
+        $this->type = $type;
     }
 
     public function getKey(): ?string
@@ -34,6 +38,18 @@ class Content
     public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }

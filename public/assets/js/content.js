@@ -3,7 +3,7 @@ const content = {};
 
 for (const card of cards){
 
-    content[card.getAttribute('key-name')] = card;
+    content[card.getAttribute('content-name')] = card;
 
     // Open card event
     card.getElementsByTagName('p')[0].onclick = () => {

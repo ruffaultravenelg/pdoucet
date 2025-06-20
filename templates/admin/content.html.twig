@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion Admin{% endblock %}
+{% block title %}Modifier les textes statiques{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="/assets/styles/content.css">
@@ -12,26 +12,31 @@
 
 {% block body %}
 
-<main class="small">
+<main>
 
     <h1>Content</h1>
     <p class="subtitle">Modifier les textes statiques</p>
 
-    <input type="text" class="field" id="search" placeholder="index.quote.author" />
+    <div class="search-container">
+        <input type="text" class="field" id="search" placeholder="index.quote.author" />
+    </div>
 
     <div id="container">
 
-        {% for elm in content %}
-            <div key-name="{{elm.key}}" class="card">
+        {% for item in data %}
+            <div content-key="{{item.elm.key}}" content-type="{{item.elm.type}}" class="card">
 
-                <p><span class="card-key">{{ elm.key }} :</span> "{{ elm.content }}"</p>
+                <p><span class="card-key">{{ item.elm.key }} :</span> "{{ item.elm.content }}"</p>
 
-                <form class="card-content" method="post" action="{{ path('content_update') }}">
+                <div class="card-content">
+                    {% if item.elm.type != 'text' %}
                     <label>Valeur a afficher :</label>
-                    <input type="hidden" name="key" value="{{ elm.key }}" />
-                    <input class="field" type="text" name="content" value="{{ elm.content }}" placeholder="A texte" />
+                    {% endif %}
+                    {{ form_start(item.form) }}
+                    {{ form_widget(item.form.content) }}
                     <button class="btn btn-primary btn-small" type="submit"><span>save</span>Modifier</button>
-                </form>
+                    {{ form_end(item.form) }}
+                </div>
 
             </div>
         {% endfor %}
