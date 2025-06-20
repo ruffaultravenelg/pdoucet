@@ -12,7 +12,3 @@
 main{
     padding: 30px;
 }
-
-main > textarea{
-    height: calc(100vh - 140px);
-}

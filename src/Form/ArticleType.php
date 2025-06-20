@@ -26,7 +26,7 @@ class ArticleType extends AbstractType
             ->add('subtitle', TextType::class, [
                 'label' => 'Sous-titre',
                 'attr' => [
-                    'placeholder' => 'Un super article',
+                    'placeholder' => 'Ceci est vraiment un super article',
                     'maxlength' => 255,
                     'class' => 'field',
                 ]
@@ -34,7 +34,7 @@ class ArticleType extends AbstractType
             ->add('tags', TextType::class, [
                 'label' => 'Tags',
                 'attr' => [
-                    'placeholder' => 'Un super article',
+                    'placeholder' => 'nature, découverte, voyage',
                     'maxlength' => 255,
                     'class' => 'field',
                 ],
@@ -43,7 +43,7 @@ class ArticleType extends AbstractType
             ->add('author', TextType::class, [
                 'label' => 'Auteur',
                 'attr' => [
-                    'placeholder' => 'Un super article',
+                    'placeholder' => 'Doucet Pascal',
                     'maxlength' => 255,
                     'class' => 'field',
                 ]

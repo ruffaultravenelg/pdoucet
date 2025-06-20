@@ -6,28 +6,21 @@
 <link rel="stylesheet" href="/assets/styles/article_write.css">
 {% endblock %}
 
-{% block javascripts %}
-<script type="module" src="/assets/js/tinymce/tinymce.min.js"></script>
-<script type="module" src="/assets/js/article_write.js"></script>
-{% endblock %}
-
 {% block body %}
 
 <main>
 
-    <!-- Tiny MCE -->
-    <textarea></textarea>
+    {{ form_start(form) }}
+    
+    {{ form_widget(form.content) }}
+    {{ form_errors(form.content) }}
 
-    <!-- UPDATE BUTTON -->
     <div class="bottom-buttons">
         <a href="{{ path('article', {id: articleId}) }}" class="btn btn-secondary">Annuler</a>
-        <button id="update_button" class="btn btn-primary">Mettre à jour</button>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
     </div>
 
-    <!-- Actual form -->
-    <div id="form_container" hidden>
-        {{ form(form) }}
-    </div>
+    {{ form_end(form) }}
 
 </main>
 
