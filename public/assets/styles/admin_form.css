@@ -3,6 +3,21 @@ main{
     margin: auto;
 }
 
+@media screen and (max-width: 850px) {
+    main{
+        width: 100%;
+    }
+    .form-field{
+        align-items: center !important;
+    }
+    .form-switch-field{
+        justify-content: center !important;
+    }
+    .requiered::after{
+        transform: translate(5px, 35px);
+    }
+}
+
 /* EACH FIELD */
 .form-field{
     display: flex;
@@ -53,7 +68,6 @@ main{
     flex-direction: row;
     gap: 30px;
     justify-content: center;
-    align-items: center;
     width: 100%;
 }
 .form-actions > *{
@@ -66,4 +80,13 @@ main{
     font-size: 0.8rem;
     margin-top: 8px;
     list-style: none;
+}
+
+/* TINY MCE */
+tinymce-editor{
+    width: 100%;
+}
+tinymce-editor .tox .tox-tinymce{
+    width: 100% !important;
+    height: 100% !important;
 }

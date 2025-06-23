@@ -3,9 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Content;
+use App\Form\ContentType;
 use App\Service\AdminService;
 use Doctrine\ORM\EntityManagerInterface;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -54,36 +59,77 @@ final class AdminController extends AbstractController
         }
 
         // Fetch content from the database
-        $content = $em->getRepository(Content::class)->findAll();
+        $contents = $em->getRepository(Content::class)->findAll();
+
+        // Create contents data
+        $data = [];
+        foreach ($contents as $content) {
+
+            $formBuilder = $this->createFormBuilder()
+                ->setAction($this->generateUrl('content_update', ['key' => $content->getKey()]))
+                ->setMethod('POST');
+            $this->addContentFieldToForm($formBuilder, $content->getType(), $content->getContent());
+
+            array_push($data, [
+                'elm' => $content,
+                'form' => $formBuilder->getForm()->createView()
+            ]);
+
+        }
 
         // Render
         return $this->render('admin/content.html.twig', [
-            'content' => $content,
+            'data' => $data,
         ]);
     }
 
-    #[Route('/content/update', name: 'content_update', methods: ['POST'])]
-    public function updateContent(Request $request, AdminService $adminService, EntityManagerInterface $em): Response
+    #[Route('/content/{key}/update', name: 'content_update', methods: ['POST'])]
+    public function updateContent(Request $request, AdminService $adminService, EntityManagerInterface $em, string $key): Response
     {
         // Check permission
         if (!$adminService->isAdmin()) {
             return $this->redirectToRoute('login');
         }
 
-        $contentKey = $request->request->get('key');
-        $contentText = $request->request->get('content');
-
-        // Fetch content from the database
-        $content = $em->getRepository(Content::class)->find($contentKey);
-
-        if ($content) {
-            $content->setContent($contentText);
-            $em->persist($content);
-            $em->flush();
-            return $this->redirectToRoute('content');
+        // Retrieve content
+        $content = $em->getRepository(Content::class)->findOneBy(['key' => $key]);
+        if (!$content) {
+            return new Response('Content not found', 404);
         }
 
-        return new Response('Content not found', 404);
+        // Create form
+        $formBuilder = $this->createFormBuilder();
+        $this->addContentFieldToForm($formBuilder, $content->getType());
+        $form = $formBuilder->getForm();
+
+        // Handle request
+        $form->handleRequest($request);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return new Response('Invalid form submission', 400);
+        }
+
+        $content->setContent($form->getData()['content']);
+        $em->persist($content);
+        $em->flush();
+        return $this->redirectToRoute('content');
+
+    }
+
+    private function addContentFieldToForm(FormBuilderInterface $builder, string $type, string $content = ''){
+
+        if ($type === 'string'){
+            $builder->add('content', TextType::class, [
+                'attr' => ['class' => 'field'],
+                'data' => $content,
+            ]);
+
+        } else if ($type === 'text') {
+            $builder->add('content', TinymceType::class, [
+                'data' => $content,
+            ]);
+
+        }
+
     }
  
     #[Route('/dashboard', name: 'dashboard')]
