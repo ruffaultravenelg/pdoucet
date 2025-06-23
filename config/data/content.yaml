@@ -1,0 +1,12 @@
+index.quote:
+    value: "Notre temps a besoin d’hommes et de femmes qui soient comme des arbres, lourds d’une paix silencieuse qui s’enracinent à la fois en pleine terre et en plein ciel."
+    type: "string"
+index.quote.author:
+    value: "Olivier Clément"
+    type: "string"
+fullname:
+    value: "Pascal Doucet"
+    type: "string"
+index.introduction:
+    value: "Nous vivons une époque singulière [...]"
+    type: "string"

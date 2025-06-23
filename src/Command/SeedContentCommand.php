@@ -3,40 +3,36 @@
 namespace App\Command;
 
 use App\Entity\Content;
+use App\Service\ContentLoader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Yaml\Yaml;
 
 #[AsCommand(
-    name: 'app:seed-content',
+    name: 'refresh:content',
     description: 'Insère les contenus statiques dans la base de données.',
 )]
 class SeedContentCommand extends Command
 {
-    public function __construct(private EntityManagerInterface $em)
-    {
+    public function __construct(private EntityManagerInterface $em, private ContentLoader $loader) {
         parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $contents = [
-            new Content('index.quote', '"Notre temps a besoin d’êtres qui soient comme des arbres, emplis d’une paix qui s’enracine dans la terre et le ciel."'),
-            new Content('index.quote.author', 'Olivier Clément'),
-            new Content('fullname', 'Pascal Doucet'),
-            new Content('index.introduction', 'Nous vivons une époque singulière [...]', 'text'),
-        ];
+        $this->em->createQuery('DELETE FROM App\Entity\Content')->execute();
 
-        foreach ($contents as $content) {
+        foreach ($this->loader->loadFromYaml() as $content) {
             $this->em->persist($content);
         }
 
         $this->em->flush();
-
-        $output->writeln('<info>Contenu inséré avec succès.</info>');
+        $output->writeln('<info>Contenu inséré depuis le fichier YAML.</info>');
 
         return Command::SUCCESS;
     }
+
 }
