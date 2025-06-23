@@ -30,6 +30,7 @@ body{
 
 @media (max-width: 500px) {
     html{
+        font-size: 15px;
     }
 }
 
@@ -73,20 +74,30 @@ header nav ul li a:hover, header nav ul li a:focus{
 
 .mobile-burger{
     display: none;
-    font-size: 50px;
+    font-size: 30px;
+    cursor: pointer;
+    text-align: right;
 }
 
 @media screen and (max-width: 800px) {
     header{
         display: flex;
-        justify-content: end;
-        padding-right: 30px;
+        justify-content: center;
         align-items: center;
+        padding: 10px;
+        width: 50px;
+        height: 50px;
+
+        right: 0;
+        left: auto;
+        border-radius: 0 0 0 10px;
+        border: 3px solid var(--color-whitesmoke);
+    }
+    body{
+        margin-top: 0;
     }
     .mobile-burger{
         display: block;
-        cursor: pointer;
-        text-align: right;
     }
     nav{
         position: fixed;
@@ -109,11 +120,6 @@ header nav ul li a:hover, header nav ul li a:focus{
 }
 .nav.open{
     transform: translateX(0);
-}
-.mobile-close{
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
 }
 
 /* MAIN */
@@ -156,12 +162,12 @@ p.subtitle{
 
 @media screen and (max-width: 850px) {
     h1{
-        font-size: 1.3rem;
+        font-size: 1.6rem;
         font-weight: 600;
         margin: 0;
     }
     p.subtitle{
-        font-size: 0.9rem;
+        font-size: 1.2rem;
         margin: 0 0 30px 0;
     }
 }
@@ -243,6 +249,13 @@ p.subtitle{
     font-size: 0.8rem;
 }
 
+@media (max-width: 500px) {
+    .btn{
+        padding: 15px 30px;
+        border-radius: 10px;
+    }
+}
+
 /* INPUT */
 .field{
     --main-color: var(--color-primary);
@@ -288,6 +301,13 @@ p.subtitle{
 
 .field[type="file"]::file-selector-button:active {
     background-color: color-mix(in srgb, var(--color-primary), black 20%);
+}
+
+@media (max-width: 500px) {
+    .field{
+        padding: 12px;
+        border-radius: 10px;
+    }
 }
 
 
