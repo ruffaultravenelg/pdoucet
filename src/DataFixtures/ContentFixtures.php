@@ -8,15 +8,12 @@ use App\Service\ContentLoader;
 
 class ContentFixtures extends Fixture
 {
-    public function __construct(private ContentLoader $loader) {}
+    public function __construct() {}
 
-    public function load(ObjectManager $manager): void
+    public function load(ObjectManager $om): void
     {
-        foreach ($this->loader->loadFromYaml() as $content) {
-            $manager->persist($content);
-        }
-
-        $manager->flush();
+        $loader = new ContentLoader($om);
+        $loader->updateDB(false);
     }
 
 }
