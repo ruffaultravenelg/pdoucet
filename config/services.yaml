@@ -27,10 +27,5 @@ services:
             $targetDirectory: '%uploads_directory%'
             $publicPath: '%uploads_public_path%'
 
-    App\DataFixtures\FileFixtures:
-        arguments:
-            $fixtures_files_directory: '%kernel.project_dir%/fixturesFiles'
-            $uploads_directory: '%uploads_directory%'
-
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

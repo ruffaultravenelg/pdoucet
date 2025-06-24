@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Content;
+use App\Entity\Page;
 use App\Service\AdminService;
 use Doctrine\ORM\EntityManagerInterface;
 use Eckinox\TinymceBundle\Form\Type\TinymceType;
@@ -141,6 +142,23 @@ final class AdminController extends AbstractController
         // Render page
         return $this->render('admin/dashboard.html.twig');
     
+    }
+
+    #[Route('/pages', name: 'pages')]
+    public function pages(AdminService $adminService, EntityManagerInterface $em): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+
+        // Fetch pages from the database
+        $pages = $em->getRepository(Page::class)->findAll();
+
+        // Render
+        return $this->render('admin/pages.html.twig', [
+            'pages' => $pages,
+        ]);
     }
 
 }

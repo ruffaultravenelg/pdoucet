@@ -43,7 +43,7 @@
                 
                 {% if is_admin() %}
                     <div class="card-admin-actions">
-                        <a  class="btn btn-primary" href="{{ path('friend_edit', { id: ami.id }) }}"><span>edit</span></a>
+                        <a class="btn btn-primary" href="{{ path('friend_edit', { id: ami.id }) }}"><span>edit</span></a>
                         <button class="btn btn-danger confirmDialog" action="{{ path('friend_delete', { id: ami.id }) }}"><span>delete</span></button>
                     </div>
                 {% endif %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les pages statiques{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/pages.css">
+{% endblock %}
+
+{% block javascripts %}
+<script type="module" src="/assets/js/confirmDialog.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <h1>Pages</h1>
+    <p class="subtitle">Editer les pages statiques du site</p>
+
+    <div class="page-container">
+
+        {% for page in pages %}
+            <div class="page-card">
+            
+                <div class="page-info">
+                    <p class="slug">/p/{{ page.slug }}</p>
+                    <p class="page-info-title">{{ page.name }}</p>
+                </div>
+
+                <div class="page-actions">
+                    <a class="btn btn-primary" href="{{ path('friend_edit', { id: page.id }) }}"><span>edit</span></a>
+                    <button class="btn btn-danger confirmDialog" action="{{ path('friend_delete', { id: page.id }) }}"><span>delete</span></button>
+                </div>
+
+            </div>
+        {% else %}
+            <p>Aucune page trouvée.</p>
+        {% endfor %}
+
+    </div>
+
+</main>
+
+{% endblock %}
