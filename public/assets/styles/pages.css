@@ -14,7 +14,7 @@
     background-color: #fff;
     border: 1px solid var(--color-placeholder);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .slug{
@@ -46,4 +46,10 @@
     padding: 15px;
     max-width: 50px;
     max-height: 50px;
+}
+
+#new_page{
+    position: absolute;
+    right: var(--page-padding);
+    top: var(--page-padding);
 }

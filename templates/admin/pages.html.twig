@@ -28,8 +28,8 @@
                 </div>
 
                 <div class="page-actions">
-                    <a class="btn btn-primary" href="{{ path('friend_edit', { id: page.id }) }}"><span>edit</span></a>
-                    <button class="btn btn-danger confirmDialog" action="{{ path('friend_delete', { id: page.id }) }}"><span>delete</span></button>
+                    <a class="btn btn-primary" href="{{ path('page_edit', { id: page.id }) }}"><span>edit</span></a>
+                    <button class="btn btn-danger confirmDialog" action="{{ path('page_delete', { id: page.id }) }}"><span>delete</span></button>
                 </div>
 
             </div>
@@ -38,6 +38,10 @@
         {% endfor %}
 
     </div>
+
+    {% if is_admin() %}
+        <a class="btn btn-primary" id="new_page" href="{{ path('page_create') }}"><span>post_add</span></a>
+    {% endif %}
 
 </main>
 

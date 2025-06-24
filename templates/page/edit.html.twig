@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une page{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/admin_form.css">
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <h1>Modifier une page</h1>
+    <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
+
+    {{ form_start(form) }}
+
+    <div class="form-field required">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.subtitle) }}
+        {{ form_widget(form.subtitle) }}
+        {{ form_errors(form.subtitle) }}
+    </div>
+
+    <div class="form-field">
+        {{ form_label(form.slug) }}
+        {{ form_widget(form.slug) }}
+        {{ form_errors(form.slug) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.headerImage) }}
+        {{ form_widget(form.headerImage) }}
+        {{ form_errors(form.headerImage) }}
+    </div>
+
+    <div class="space-bottom">
+        {{ form_widget(form.content) }}
+        {{ form_errors(form.content) }}
+    </div>
+
+    <div class="form-actions">
+        <a href="{{ path('pages') }}" class="btn btn-secondary">Annuler</a>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    
+    {{ form_end(form) }}
+
+</main>
+
+{% endblock %}

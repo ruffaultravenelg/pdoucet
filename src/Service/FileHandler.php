@@ -27,7 +27,7 @@ class FileHandler
         return $fileName;
     }
 
-    public function delete(string $filename){
+    public function delete(?string $filename){
         if ($filename == null || $filename == ''){
             return;
         }

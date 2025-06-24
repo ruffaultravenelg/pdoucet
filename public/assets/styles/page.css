@@ -17,3 +17,9 @@ section.landing img{
     height: 100%;
     z-index: -1;
 }
+
+#edit_page{
+    position: absolute;
+    right: var(--page-padding);
+    top: calc(var(--page-padding) + 80px);
+}

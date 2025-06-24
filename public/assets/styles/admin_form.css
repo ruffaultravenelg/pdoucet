@@ -90,3 +90,7 @@ tinymce-editor .tox .tox-tinymce{
     width: 100% !important;
     height: 100% !important;
 }
+
+.space-bottom{
+    margin-bottom: 30px;
+}

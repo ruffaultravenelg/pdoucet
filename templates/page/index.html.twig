@@ -29,4 +29,9 @@
     {{ page.content|raw }}
 </main>
 
+
+{% if is_admin() %}
+    <a class="btn btn-primary" id="edit_page" href="{{ path('page_edit', { id: page.id }) }}"><span>edit</span></a>
+{% endif %}
+
 {% endblock %}
