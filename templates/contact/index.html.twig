@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/contact.css">
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <img src="/assets/images/portrait.png" alt="Pascal Doucet">
+
+    <div>
+        <h1>Me contacter</h1>
+        <p class="info">Email : <span class="info-data">{{ email }}</span></p>
+        <p class="info">Téléphone : <span class="info-data">{{ phone }}</span></p>
+        <p class="info">Adresse : <span class="info-data">{{ address }}</span></p>
+    </div>
+
+</main>
+
+{% endblock %}
