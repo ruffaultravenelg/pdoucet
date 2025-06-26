@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="/assets/styles/admin_form.css">
+<link rel="stylesheet" href="/assets/styles/page_form.css">
 {% endblock %}
 
 {% block body %}
@@ -27,7 +28,7 @@
         {{ form_errors(form.subtitle) }}
     </div>
 
-    <div class="form-field">
+    <div class="form-field required">
         {{ form_label(form.slug) }}
         {{ form_widget(form.slug) }}
         {{ form_errors(form.slug) }}

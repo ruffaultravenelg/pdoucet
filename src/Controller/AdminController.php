@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Content;
 use App\Entity\Page;
 use App\Service\AdminService;
+use App\Service\SettingsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -159,6 +160,46 @@ final class AdminController extends AbstractController
         return $this->render('admin/pages.html.twig', [
             'pages' => $pages,
         ]);
+    }
+
+    #[Route('/settings', name: 'settings')]
+    public function settings(AdminService $adminService, SettingsService $settingsService): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+
+        // Fetch settings
+        $settings = $settingsService->getAll();
+
+        // Render
+        return $this->render('admin/settings.html.twig', [
+            'settings' => $settings,
+        ]);
+    }
+
+    #[Route('/setting/{key}/update', name: 'settings_update', methods: ['POST'])]
+    public function updateSetting(Request $request, AdminService $adminService, SettingsService $settingsService, string $key): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+        return new Response('Not authorized', 403);
+        }
+
+
+        // Handle form submission
+        if ($request->isMethod('POST')) {
+            // Payload is {value: 'value'}
+            $data = json_decode($request->getContent(), true);
+            if (!isset($data['value'])) {
+                return new Response('Invalid data', 400);
+            };
+            $settingsService->set($key, $data['value']);
+            return new Response('Setting updated successfully', 200);
+        }
+
+        return new Response('Invalid request method', 405);
     }
 
 }

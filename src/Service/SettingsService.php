@@ -33,5 +33,10 @@ class SettingsService
         $this->em->persist($setting);
         $this->em->flush();
     }
+
+    public function getAll(): array
+    {
+        return $this->em->getRepository(Setting::class)->findAll();
+    }
   
 }

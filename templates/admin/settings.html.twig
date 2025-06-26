@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paramètres généraux{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/settings.css">
+{% endblock %}
+
+{% block javascripts %}
+<script type="module" src="/assets/js/settings.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <h1>Paramètres généraux</h1>
+    <p class="subtitle">Modifier les diverses valeurs et paramètres du site</p>
+
+    <div id="settings_container">
+
+        {% for setting in settings %}
+
+            <div class="setting-item" data-update-endpoint="{{ path('settings_update', { key: setting.key }) }}">
+                <p class="setting-name">{{ setting.key }}</p>
+                <p class="setting-value">{{ setting.value }}</p>
+                <button class="edit-btn btn btn-primary"><span>edit</span></button>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+{% endblock %}
