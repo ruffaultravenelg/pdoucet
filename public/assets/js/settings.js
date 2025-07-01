@@ -32,7 +32,7 @@ for (const setting of settings_container.children) {
             swal("Succès", "Paramètre mis à jour avec succès.", "success");
         })
         .catch(err => {
-            swal("Error!", "Failed to update setting.", "error");
+            if (err) swal("Error!", err, "error");
         });
     });
 

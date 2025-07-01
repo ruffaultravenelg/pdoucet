@@ -1,3 +1,4 @@
 email: 'mieuxetre.pdoucet@netc.fr'
 phone: '+3302313380'
 address: '123 Main St, Anytown, USA'
+header: '[ { "title": "Accueil", "path": "/" }, { "title": "Articles", "path": "/articles" }, { "title": "Contact", "path": "/contact" } ]'

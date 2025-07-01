@@ -18,14 +18,10 @@
             <i class="mobile-burger">menu</i>
             <nav class="nav">
                 <ul>
-                    <li><a href="{{ path('index') }}">Accueil</a></li>
-                    <li><a href="{{ path('articles') }}">Articles</a></li>
-                    <li><a href="#">Actualité</a></li>
-                    <li><a href="#">Parcours</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Publications</a></li>
-                    <li><a href="{{ path('contact') }}">Contact</a></li>
-                    <li><i class="mobile-burger mobile-close">close</i></li>
+                    {% for link in header_links %}
+                        <li><a href="{{ link.path }}">{{ link.title }}</a></li>
+                    {% endfor %}
+                    <li class="only-mobile"><i class="mobile-burger mobile-close">close</i></li>
                 </ul>
             </nav>
         </header>
@@ -61,7 +57,7 @@
         </footer>
         
         <!-- SCRIPTS -->
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="/assets/js/libs/sweetalert.min.js"></script>
         <script src="/assets/js/header.js"></script>
         {% block javascripts %}
         {% endblock %}

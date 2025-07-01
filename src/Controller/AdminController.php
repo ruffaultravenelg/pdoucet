@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Content;
+use App\Entity\HeaderLink;
 use App\Entity\Page;
 use App\Service\AdminService;
 use App\Service\SettingsService;
@@ -172,6 +173,7 @@ final class AdminController extends AbstractController
 
         // Fetch settings
         $settings = $settingsService->getAll();
+        $settings = array_filter($settings, function ($se){ return $se->getKey() != "header"; });
 
         // Render
         return $this->render('admin/settings.html.twig', [
@@ -200,6 +202,21 @@ final class AdminController extends AbstractController
         }
 
         return new Response('Invalid request method', 405);
+    }
+
+    #[Route('/header', name: 'header')]
+    public function header(AdminService $adminService, EntityManagerInterface $em): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return $this->redirectToRoute('login');
+        }
+
+        $headerLinks = [];
+
+        return $this->render('admin/header.html.twig', [
+            'links' => $headerLinks,
+        ]);
     }
 
 }
