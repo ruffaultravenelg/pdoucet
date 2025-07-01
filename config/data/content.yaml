@@ -9,4 +9,4 @@ fullname:
     type: "string"
 index.introduction:
     value: "Nous vivons une époque singulière [...]"
-    type: "string"
+    type: "text"
