@@ -1,0 +1,92 @@
+main{
+    --spacing: 0.5rem;
+}
+
+#container{
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-whitesmoke);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    padding: var(--spacing);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing);
+    overflow-x: auto;
+}
+
+#container > div{
+    transition-duration: 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--color-white);
+    border-radius: 10px;
+    padding: 20px 20px 16px 20px;
+    cursor: grab;
+    border-bottom: 4px solid transparent;
+}
+#container > div.selected{
+    border-bottom-color: var(--color-primary);
+}
+
+.dragging {
+    opacity: 0.5;
+}
+
+#save{
+    margin: 30px auto 0 auto;
+    width: 100%;
+    max-width: 500px;
+}
+
+#edit_container{
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-whitesmoke);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    padding: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+    max-width: 500px;
+    margin: 30px auto 0 auto;
+}
+#edit_container > *{
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--color-white);
+    border-radius: 10px;
+    padding: 20px;
+}
+#edit_container > * > *{
+    width: 100%;
+}
+
+.step{
+    font-size: 1rem;
+    color: var(--color-black);
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+}
+
+#edit_name{
+    text-align: center;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+#delete_panel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+#delete_panel > *{
+    width: auto;
+}
+
+#new_item{
+    position: absolute;
+    top: var(--page-padding);
+    right: var(--page-padding);
+}

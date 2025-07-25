@@ -20,15 +20,6 @@ class HeaderExtension extends AbstractExtension implements GlobalsInterface
         $headerLinks = [];
         foreach ($headerJson as $link) {
 
-            // A custom path
-            if (isset($link['title']) && isset($link['path'])) {
-                $headerLinks[] = [
-                    'title' => $link['title'],
-                    'path' => $link['path'],
-                ];
-                continue;
-            }
-
             // A page
             if (isset($link['pageId'])){
                 $page = $this->pageRepository->find($link['pageId']);
@@ -40,8 +31,16 @@ class HeaderExtension extends AbstractExtension implements GlobalsInterface
                 continue;
             }
 
-        }
+            // A custom path
+            if (isset($link['title']) && isset($link['path'])) {
+                $headerLinks[] = [
+                    'title' => $link['title'],
+                    'path' => $link['path'],
+                ];
+                continue;
+            }
 
+        }
 
         return [
             'header_links' => $headerLinks,

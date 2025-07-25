@@ -10,6 +10,7 @@ use App\Service\SettingsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -205,18 +206,40 @@ final class AdminController extends AbstractController
     }
 
     #[Route('/header', name: 'header')]
-    public function header(AdminService $adminService, EntityManagerInterface $em): Response
+    public function header(AdminService $adminService, EntityManagerInterface $em, SettingsService $settingsService): Response
     {
         // Check permission
         if (!$adminService->isAdmin()) {
             return $this->redirectToRoute('login');
         }
 
-        $headerLinks = [];
+        $headerItems = $settingsService->get('header');
+        $pages = [];
+        foreach ($em->getRepository(Page::class)->findAll() as $page){
+            array_push($pages, [
+                'name' => $page->getName(),
+                'id' => $page->getId()
+            ]);
+        }
 
         return $this->render('admin/header.html.twig', [
-            'links' => $headerLinks,
+            'headerItems' => $headerItems,
+            'pages' => $pages,
         ]);
+    }
+
+    #[Route('/header/update', name: 'header_update', methods: ['POST'])]
+    public function updateHeader(Request $request, AdminService $adminService, SettingsService $settingsService): Response
+    {
+        // Check permission
+        if (!$adminService->isAdmin()) {
+            return new Response('Not authorized', 403);
+        }
+
+        $headerItems = $request->request->get("headerItems");
+        $settingsService->set('header', $headerItems);
+
+        return $this->redirectToRoute('header');
     }
 
 }

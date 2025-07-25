@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les textes statiques{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/dashboardHeader.css">
+{% endblock %}
+
+{% block javascripts %}
+<script>
+window.headerItems = JSON.parse(`{{ headerItems | raw }}`);
+</script>
+<script type="module" src="/assets/js/dashboardHeader.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <h1>Header</h1>
+    <p class="subtitle">Modifier les liens du header</p>
+
+    <div id="container">
+        <!-- AUTO FILLED -->
+    </div>
+
+    <div id="edit_container">
+        
+        <!-- REDIRECTION TYPE SELECTION -->
+        <div>
+            <p class="step">Type de redirection</p>
+            <select class="field" id="redirect_type">
+                <option value="link">Rediriger vers une url</option>
+                {% if pages | length > 0 %}
+                <option value="page">Rediriger vers une page</option>
+                {% endif %}
+            </select>
+        </div>
+
+        <!-- LINK PANEL -->
+        <div id="link_panel">
+            <p class="step">Titre</p>
+            <input class="field" id="link_title" placeholder="Titre du lien">
+            <p class="step" style="margin-top: 15px">URL</p>
+            <input class="field" id="link_url" placeholder="https://example.com">
+        </div>
+
+        <!-- PAGE PANEL -->
+        <div id="page_panel">
+            <p class="step">Selectionnez la page</p>
+            <select class="field" id="page_select">
+                {% for page in pages %}
+                <option value="{{ page.id }}">{{ page.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- DELETE -->
+        <button id="delete_panel" class="btn">
+            <i>delete</i>
+            Supprimer l'élément
+        </button>
+
+    </div>
+
+    <button class="btn btn-primary" id="new_item"><span>add</span></button>
+    <button class="btn btn-primary" id="save"><span>save</span>Enregistrer</button>
+
+</main>
+
+{% endblock %}

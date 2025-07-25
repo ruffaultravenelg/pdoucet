@@ -25,7 +25,7 @@ class SeedContentCommand extends Command
             ->addArgument(
                 'erase',
                 InputArgument::OPTIONAL,
-                'Erase existing settings before inserting new ones (true/false)',
+                'Erase existing content before inserting new ones (true/false)',
                 'false'
             );
     }
