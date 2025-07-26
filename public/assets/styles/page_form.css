@@ -12,11 +12,3 @@ main > form{
     width: 100%;
     max-width: 700px;
 }
-
-.space-bottom{
-    width: 100%;
-}
-
-tinymce-editor .tox-tinymce{
-    height: 700px !important;
-}

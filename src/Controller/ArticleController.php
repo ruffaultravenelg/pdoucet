@@ -6,7 +6,6 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Service\AdminService;
 use Doctrine\ORM\EntityManagerInterface;
-use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -168,11 +167,11 @@ final class ArticleController extends AbstractController
         }
 
         $form = $this->createFormBuilder()
-            ->add('content', TinymceType::class, [
+            ->add('content', TextareaType::class, [
                 'data' => $article->getContent(),
                 'attr' => [
-                    'plugins' => 'image',
-                ],
+                    'class' => 'tinymce',
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Mettre à jour',

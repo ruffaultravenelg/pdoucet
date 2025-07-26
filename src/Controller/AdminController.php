@@ -8,9 +8,8 @@ use App\Entity\Page;
 use App\Service\AdminService;
 use App\Service\SettingsService;
 use Doctrine\ORM\EntityManagerInterface;
-use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -126,8 +125,11 @@ final class AdminController extends AbstractController
             ]);
 
         } else if ($type === 'text') {
-            $builder->add('content', TinymceType::class, [
+            $builder->add('content', TextareaType::class, [
                 'data' => $content,
+                'attr' => [
+                    'class' => 'tinymce',
+                ]
             ]);
 
         }

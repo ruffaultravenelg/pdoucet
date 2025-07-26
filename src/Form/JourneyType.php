@@ -3,11 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Journey;
-use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,12 +33,11 @@ class JourneyType extends AbstractType
                     'class' => 'field',
                 ],
             ])
-            ->add('description', TinymceType::class, [
+            ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'attr' => [
-                    'placeholder' => 'Description de l\'étape',
-                ],
-                'required' => false,
+                    'class' => 'tinymce',
+                ]
             ])
             ->add('address', TextType::class, [
                 'label' => 'Adresse',

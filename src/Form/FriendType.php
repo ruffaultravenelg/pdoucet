@@ -3,10 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Friend;
-use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,9 +29,11 @@ class FriendType extends AbstractType
                     new Constraints\NotBlank(['message' => 'Le nom est obligatoire'])
                 ]
             ])
-            ->add('description', TinymceType::class, [
+            ->add('description', TextareaType::class, [
                 'label' => 'Description',
-                'required' => false,
+                'attr' => [
+                    'class' => 'tinymce',
+                ]
             ])
             ->add('avatar', FileType::class, [
                 'label' => $options['avatar_label'],

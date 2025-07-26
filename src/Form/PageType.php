@@ -3,10 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Page;
-use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -48,6 +48,7 @@ class PageType extends AbstractType
                 'label' => $options['image_label'],
                 'attr' => [
                     'class' => 'field',
+                    'accept' => 'image/jpeg,image/png,image/gif,image/webp',
                 ],
                 'mapped' => false,
                 'required' => false,
@@ -63,10 +64,11 @@ class PageType extends AbstractType
                     ])
                 ],
             ])
-            ->add('content', TinymceType::class, [
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu',
                 'attr' => [
-                    'plugins' => 'image',
-                ],
+                    'class' => 'tinymce',
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => $options['submit_label'],

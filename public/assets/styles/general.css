@@ -228,6 +228,9 @@ p.subtitle{
     --main-color: var(--color-whitesmoke);
     color: var(--color-black);
 }
+.btn-secondary:hover{
+    background-color: color-mix(in srgb, var(--main-color), black 5%);
+}
 .btn-secondary:focus{
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), black 10%);
 }

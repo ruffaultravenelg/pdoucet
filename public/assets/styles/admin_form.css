@@ -81,16 +81,3 @@ main{
     margin-top: 8px;
     list-style: none;
 }
-
-/* TINY MCE */
-tinymce-editor{
-    width: 100%;
-}
-tinymce-editor .tox .tox-tinymce{
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.space-bottom{
-    margin-bottom: 30px;
-}
