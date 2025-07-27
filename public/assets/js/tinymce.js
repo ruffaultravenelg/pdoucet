@@ -30,7 +30,9 @@ tinymce_script.onload = () => {
         default_link_target: '_blank',
         link_title: false,
         branding: false,
-        convert_urls: false
+        convert_urls: false,
+        images_upload_url: '/tinymce-upload',
+        images_reuse_filename: true,
     });
 };
 
