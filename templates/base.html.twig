@@ -39,7 +39,7 @@
             </div>
             <div>
                 <p>Site web</p>
-                <a href="/legal">Mentions légales</a>
+                <a href="{{ path('legal') }}">Mentions légales</a>
                 {% if is_admin() %}
                     <a href="/logout">Se déconnecter</a>
                     <a href="/dashboard">Dashboard</a>

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions legales{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/legal.css">
+{% endblock %}
+
+{% block body %}
+
+<section class="landing">
+    <h1>Mention légales</h1>
+</section>
+
+<main>
+    {{ content('legal.content')|raw }}
+</main>
+
+{% endblock %}

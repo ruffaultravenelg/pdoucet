@@ -14,7 +14,7 @@ tinymce_script.onload = () => {
             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
             'preview', 'anchor', 'searchreplace', 'visualblocks',
             'fullscreen', 'insertdatetime', 'media',
-            'table', 'wordcount', 'paste'
+            'table', 'wordcount'
         ],
 
         toolbar_mode: 'sliding',

@@ -32,7 +32,7 @@
     height: 270px;
 }
 .card-open[content-type="text"]{
-    height: 550px;
+    height: 650px;
     width: 100%;
     max-width: 1000px;
 }

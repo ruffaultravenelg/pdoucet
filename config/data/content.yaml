@@ -10,3 +10,6 @@ fullname:
 index.introduction:
     value: "Nous vivons une époque singulière [...]"
     type: "text"
+legal.content:
+    value: "<h1>Article 1</h1>Mentions legales..."
+    type: "text"
