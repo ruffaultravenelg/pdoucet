@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/statistics.css">
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+
+{% block body %}
+
+<section class="landing">
+    <h1>Statistiques</h1>
+    <p class="subtitle">Différentes données bruts du site</p>
+</section>
+
+<main>
+
+    <!-- ARTICLE VIEWS -->
+    <h2>Nombre de vue des articles</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Nombre de visites</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articleTable %}
+                <tr>
+                    <td>{{ article.id }}</td>
+                    <td><a href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></td>
+                    <td>{{ article.visitCount }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun article trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</main>
+
+{% endblock %}

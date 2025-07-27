@@ -37,6 +37,9 @@ class Article
     #[ORM\Column]
     private ?bool $visible = null;
 
+    #[ORM\Column(options: ["default" => 0])]
+    private int $visitCount = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Article
     public function setVisible(bool $visible): static
     {
         $this->visible = $visible;
+
+        return $this;
+    }
+
+    public function getVisitCount(): int
+    {
+        return $this->visitCount;
+    }
+
+    public function setVisitCount(int $visitCount): static
+    {
+        $this->visitCount = $visitCount;
 
         return $this;
     }

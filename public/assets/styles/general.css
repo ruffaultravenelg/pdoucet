@@ -166,6 +166,30 @@ p.subtitle{
     margin: 0 60px 60px 60px;
 }
 
+h2{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-black);
+    text-align: left;
+    margin: 30px 0 15px 0;
+    position: relative;
+}
+h2::before{
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 20px;
+    background-color: var(--color-primary);
+    bottom: 0;
+    left: 6px;
+    opacity: 25%;
+}
+
+body h2:first-child{
+    margin-top: 0;
+}
+
 @media screen and (max-width: 850px) {
     h1{
         font-size: 1.6rem;

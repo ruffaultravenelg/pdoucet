@@ -42,12 +42,18 @@ final class ArticleController extends AbstractController
     }
     
     #[Route('/article/{id}/view', name: 'article')]
-    public function article(Article $article, AdminService $adminService): Response
+    public function article(Article $article, AdminService $adminService, EntityManagerInterface $em): Response
     {
 
         // Check if article is visible
         if (!$article->isVisible() && !$adminService->isAdmin()) {
             return $this->redirectToRoute('articles');
+        }
+
+        if (!$adminService->isAdmin()){
+            $em->createQuery('UPDATE App\Entity\Article a SET a.visitCount = a.visitCount + 1 WHERE a.id = :id')
+                ->setParameter('id', $article->getId())
+                ->execute();
         }
 
         return $this->render('article/article.html.twig', [
