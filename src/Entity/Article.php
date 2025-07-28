@@ -25,7 +25,7 @@ class Article
     #[ORM\Column]
     private ?\DateTimeImmutable $date_modifed = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $tags = null;
 
     #[ORM\Column(length: 65536)]

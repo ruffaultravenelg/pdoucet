@@ -29,7 +29,8 @@ class ArticleType extends AbstractType
                     'placeholder' => 'Ceci est vraiment un super article',
                     'maxlength' => 255,
                     'class' => 'field',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('tags', TextType::class, [
                 'label' => 'Tags',
