@@ -22,6 +22,10 @@
     <h1>Carnet de voyage</h1>
     <p class="subtitle">Suivez mes déplacements et aventures !</p>
 
+    {% if journeys is empty %}
+        <p class="no-journey">Aucune étape de voyage n'a encore été ajoutée.</p>
+    {% endif %}
+
     <div id="map" class="map"></div>
     <div id="map_loader" class="map"><div class="flex-container"><div class="map-loader"></div></div></div>
     <div id="map_not_found" class="map"><div class="flex-container">Impossible de trouver la localisation</div></div>

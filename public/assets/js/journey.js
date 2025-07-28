@@ -88,6 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Get journeys
     const journeys = document.querySelectorAll('.journey');
+    if (journeys.length === 0) {
+        mapContainer.style.display = 'none';
+        map_loader.style.display = 'none';
+        map_not_found.style.display = 'none';
+        return;
+    }
     
     // Set update event for each journey
     for (const journey of journeys) {

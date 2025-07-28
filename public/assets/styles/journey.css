@@ -37,10 +37,6 @@
     justify-content: center;
 }
 
-#map_not_found{
-
-}
-
 .journey{
     padding: 20px 40px;
     width: 80%;
@@ -97,4 +93,9 @@
     width: auto;
     margin: 0 auto;
     margin-bottom: 60px;
+}
+
+.no-journey{
+    text-align: center;
+    margin-bottom: var(--page-padding);
 }
