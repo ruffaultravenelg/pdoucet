@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="/assets/styles/admin_form.css">
 {% endblock %}
 
+{% block javascripts %}
+<script src="/assets/js/indexlink.js"></script>
+{% endblock %}
+
 {% block body %}
 
 <main>
@@ -15,22 +19,30 @@
 
     {{ form_start(form) }}
     
+    <div class="form-field requiered">
+        {{ form_label(form.page) }}
+        {{ form_widget(form.page) }}
+        {{ form_errors(form.page) }}
+    </div>
+
+    <div id="url_field">    
         <div class="form-field requiered">
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name) }}
-        {{ form_errors(form.name) }}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        
+        <div class="form-field requiered">
+            {{ form_label(form.url) }}
+            {{ form_widget(form.url) }}
+            {{ form_errors(form.url) }}
+        </div>
     </div>
     
     <div class="form-field requiered">
         {{ form_label(form.image) }}
         {{ form_widget(form.image) }}
         {{ form_errors(form.image) }}
-    </div>
-    
-    <div class="form-field requiered">
-        {{ form_label(form.url) }}
-        {{ form_widget(form.url) }}
-        {{ form_errors(form.url) }}
     </div>
     
     <div class="form-actions">

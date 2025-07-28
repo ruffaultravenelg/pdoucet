@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\IndexLink;
+use App\Entity\Page;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,6 +24,7 @@ class IndexLinkType extends AbstractType
                     'placeholder' => 'Articles',
                     'class' => 'field',
                 ],
+                'required' => false,
             ])
             ->add('image', FileType::class, [
                 'label' => $options['image_label'],
@@ -29,7 +32,7 @@ class IndexLinkType extends AbstractType
                     'class' => 'field',
                 ],
                 'mapped' => false,
-                'required' => false,
+                'required' => $options['image_label'] !== 'Modifier l\'image',
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -42,12 +45,23 @@ class IndexLinkType extends AbstractType
                     ])
                 ],
             ])
+            ->add('page', EntityType::class, [
+                'class' => Page::class,
+                'choice_label' => 'name',
+                'label' => 'Page liée',
+                'required' => false,
+                'placeholder' => 'Utiliser une URL',
+                'attr' => [
+                    'class' => 'field',
+                ],
+            ])
             ->add('url', TextType::class, [
                 'label' => 'URL',
                 'attr' => [
                     'placeholder' => '/articles',
                     'class' => 'field',
                 ],
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => $options['submit_label'],

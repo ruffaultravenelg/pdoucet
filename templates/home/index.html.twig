@@ -145,8 +145,14 @@
 
     {% for link in links %}
     <div>
+        {% if link.page %}
+        <img src="{{ file(link.image) }}" alt="Image d'illustration de la page {{ link.page.name }}" onclick="window.location='{{ path('page', { slug: link.page.slug }) }}'"/>
+        <p onclick="window.location='{{ path('page', { slug: link.page.slug }) }}'">{{ link.page.name }}</p>
+        {% else %}
         <img src="{{ file(link.image) }}" alt="Image d'illustration de la page {{ link.name }}" onclick="window.location='{{ link.url }}'"/>
         <p onclick="window.location='{{ link.url }}'">{{ link.name }}</p>
+        {% endif %}
+
         {% if is_admin() %}
             <div class="card-admin-actions">
                 <a class="btn btn-primary" href="{{ path('indexlink_edit', { id: link.id }) }}"><span>edit</span></a>
