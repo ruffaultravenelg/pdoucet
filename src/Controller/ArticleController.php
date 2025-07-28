@@ -177,7 +177,8 @@ final class ArticleController extends AbstractController
                 'data' => $article->getContent(),
                 'attr' => [
                     'class' => 'tinymce',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Mettre à jour',
