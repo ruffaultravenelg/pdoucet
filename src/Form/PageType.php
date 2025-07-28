@@ -21,7 +21,7 @@ class PageType extends AbstractType
                 'label' => 'Titre',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => 'Prestations',
+                    'placeholder' => 'Super page',
                     'maxlength' => 255,
                     'class' => 'field',
                 ]
@@ -39,7 +39,7 @@ class PageType extends AbstractType
                 'label' => 'Slug',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => 'Ceci est vraiment une super page',
+                    'placeholder' => 'super-page',
                     'maxlength' => 255,
                     'class' => 'field',
                 ]
@@ -68,7 +68,8 @@ class PageType extends AbstractType
                 'label' => 'Contenu',
                 'attr' => [
                     'class' => 'tinymce',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => $options['submit_label'],

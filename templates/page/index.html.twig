@@ -14,7 +14,7 @@
 
 {% block body %}
 
-<section class="landing">
+<section class="landing {% if not page.headerImage %}little-landing{% endif %}">
 
     {% if page.headerImage %}
     <img src="{{ file(page.headerImage) }}" alt="Image de fond"/>
