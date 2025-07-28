@@ -33,7 +33,8 @@ class FriendType extends AbstractType
                 'label' => 'Description',
                 'attr' => [
                     'class' => 'tinymce',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('avatar', FileType::class, [
                 'label' => $options['avatar_label'],

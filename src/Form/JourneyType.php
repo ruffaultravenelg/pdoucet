@@ -37,7 +37,8 @@ class JourneyType extends AbstractType
                 'label' => 'Description',
                 'attr' => [
                     'class' => 'tinymce',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('address', TextType::class, [
                 'label' => 'Adresse',
