@@ -1,49 +1,51 @@
-const cards = Array.from(document.getElementById('container').children).filter(card => card.classList.contains('card'));
-const content = {};
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const cards = document.getElementById('container').children;
+    const contentDico = {};
 
-for (const card of cards){
+    for (const card of cards){
+        if (!card.classList.contains('card')) continue;
 
-    content[card.getAttribute('content-name')] = card;
+        contentDico[card.getAttribute('content-key')] = card;
 
-    // Open card event
-    card.getElementsByTagName('p')[0].onclick = () => {
-        card.classList.toggle('card-open');
-    }
-
-    // Update value event
-    card.getElementsByTagName('button')
-
-}
-
-const search = document.getElementById('search');
-const no_result = document.getElementById('no-result');
-
-search.onkeyup = () => {
-    const value = search.value.toLowerCase();
-
-    // If the search input is empty, show all cards
-    if (value === '') {
-        for (const key in content) {
-            content[key].style.display = '';
+        // Open card event
+        card.getElementsByTagName('p')[0].onclick = () => {
+            card.classList.toggle('card-open');
         }
-        no_result.style.display = 'none';
-        return;
+
     }
 
-    // Otherwise, filter the cards based on the search input
-    for (const key in content) {
-        if (key.toLowerCase().includes(value)) {
-            content[key].style.display = '';
+    const search = document.getElementById('search');
+    const no_result = document.getElementById('no-result');
+
+    search.onkeyup = () => {
+        const value = search.value.toLowerCase();
+
+        // If the search input is empty, show all cards
+        if (value === '') {
+            for (const key in contentDico) {
+                contentDico[key].style.display = '';
+            }
+            no_result.style.display = 'none';
+            return;
+        }
+
+        // Otherwise, filter the cards based on the search input
+        for (const key in contentDico) {
+            if (key.toLowerCase().includes(value)) {
+                contentDico[key].style.display = '';
+            } else {
+                contentDico[key].style.display = 'none';
+            }
+        }
+        
+        // If no cards are found, show a message
+        if (Array.from(cards).filter(card => card.style.display !== 'none').length === 0) {
+            no_result.style.display = 'block';
         } else {
-            content[key].style.display = 'none';
+            no_result.style.display = 'none';
         }
-    }    
 
-    // If no cards are found, show a message
-    if (Array.from(cards).filter(card => card.style.display !== 'none').length === 0) {
-        no_result.style.display = 'block';
-    } else {
-        no_result.style.display = 'none';
     }
 
-}
+});
