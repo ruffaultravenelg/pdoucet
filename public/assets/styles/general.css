@@ -172,9 +172,11 @@ h2{
     color: var(--color-black);
     text-align: left;
     margin: 30px 0 15px 0;
+}
+.highlighter{
     position: relative;
 }
-h2::before{
+.highlighter::before{
     z-index: -1;
     content: '';
     position: absolute;
