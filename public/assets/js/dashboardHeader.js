@@ -11,7 +11,7 @@ const new_item = document.getElementById('new_item');
 
 // For draggability
 let headerItems = window.headerItems || [];
-const firstPageId = document.getElementById('page_select').children[0].value || '';
+const firstPageId = document.getElementById('page_select').children[0]?.value || '';
 
 let draggedItem = null;
 function refreshDisplay(){
@@ -21,9 +21,17 @@ function refreshDisplay(){
 
     headerItems.forEach(i => {
 
+        var pageId_pageName;
+        if (i.pageId){
+            pageId_pageName = Array.from(page_select.options).find(opt => opt.value === i.pageId)?.text;
+            if (!pageId_pageName){
+                return;
+            }
+        }
+
         const item = document.createElement("div");
         item.textContent = i.pageId
-            ? (Array.from(page_select.options).find(opt => opt.value === i.pageId)?.text || '')
+            ? pageId_pageName
             : i.title;
         item.setAttribute('data-title', i.title || '');
         item.setAttribute('data-pageId', i.pageId || '');
