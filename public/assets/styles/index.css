@@ -209,23 +209,14 @@ section.heart > h2, section.heart > h3{
 /* DEPECHE */
 section.depeche{
     background-color: var(--color-whitesmoke);
-    display: flex;
-    gap: var(--page-padding);
     position: relative;
 }
-section.depeche > div{
+.depeche-container{
     width: 100%;
+    display: flex;
+    align-items: start;
+    gap: var(--page-padding);
 }
-.depeche-title{
-    font-size: 1.7rem;
-}
-section.depeche > div:nth-child(1) p > span{
-    color: green;
-}
-section.depeche > div:nth-child(2) p > span{
-    color: red;
-}
-
 section.depeche ul{
     width: 100%;
 }

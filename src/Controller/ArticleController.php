@@ -39,6 +39,7 @@ final class ArticleController extends AbstractController
             'articles' => $articles,
             'hiddenArticles' => $hiddenArticles,
         ]);
+
     }
     
     #[Route('/article/{id}/view', name: 'article')]

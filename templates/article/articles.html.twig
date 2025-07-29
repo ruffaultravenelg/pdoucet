@@ -19,6 +19,16 @@
                 <p class="article-card-date">{{ article.dateCreated | date('d/m/Y') }}</p>
                 <p class="article-card-title">{{ article.title }}</p>
                 <p class="article-card-subtitle">{{ article.subtitle }}</p>
+
+                {% if article.tags is not empty %}
+                    <p class="article-card-tags">
+                        {% for tag in article.tags|split(',') %}
+                            {% if tag|trim is not empty %}
+                                <span class="article-tag">{{ tag|trim }}</span>
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                {% endif %}
             </a>
 
         {% endfor %}

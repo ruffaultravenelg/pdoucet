@@ -106,8 +106,8 @@
 <!-- DEPECHE -->
 <section class="depeche">
 
-    <div>
-        <p class="depeche-title">Les <span>bonnes</span> nouvelles</p>
+    <h2>Nouvelles du monde</h2>
+    <div class="depeche-container">
         <ul>
             {% for depeche in positiveDepeches %}
             <li>
@@ -118,11 +118,6 @@
             </li>
             {% endfor %}
         </ul>
-
-    </div>
-
-    <div>
-        <p class="depeche-title">Les <span>mauvaises</span> nouvelles</p>
         <ul>
             {% for depeche in negativeDepeches %}
             <li>
@@ -132,8 +127,7 @@
                 {% endif %}
             </li>
             {% endfor %}
-        <ul/>
-        
+        </ul>
     </div>
 
     {% if is_admin() %}

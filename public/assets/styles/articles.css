@@ -42,6 +42,26 @@
     color: var(--color-black);
     font-size: 1rem;
 }
+.article-card-tags{
+    text-align: right;
+    margin-top: 0.5rem;
+    line-height: 40px;
+}
+.article-tag{
+    background-color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 500px) {
+    .article-card-tags{
+        text-align: left;
+        line-height: 30px;
+    }
+}
 
 #new_article{
     position: absolute;
