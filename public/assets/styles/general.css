@@ -407,7 +407,7 @@ body h2:first-child{
 /* FOOTER */
 footer{
     width: 100%;
-    background-color: #1A7941;
+    background-color: var(--color-primary);
     padding: 60px;
     color: var(--color-white);
     display: flex;
