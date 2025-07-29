@@ -11,7 +11,7 @@ const new_item = document.getElementById('new_item');
 
 // For draggability
 let headerItems = window.headerItems || [];
-const firstPageId = document.getElementById('page_select').children[0].value;
+const firstPageId = document.getElementById('page_select').children[0].value || '';
 
 let draggedItem = null;
 function refreshDisplay(){
