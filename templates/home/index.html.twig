@@ -26,7 +26,9 @@
     <h3>10/04/2025</h3>
     <h2>Présentation</h2>
 
-    <p>{{ content('index.introduction') | raw }}</p>
+    <div class="richtext">
+        {{ content('index.introduction') | raw }}
+    </div>
 
     <div class="rightbar">
         <p>{{ content('fullname') }}</p>

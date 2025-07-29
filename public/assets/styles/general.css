@@ -478,3 +478,22 @@ footer a:hover, footer a:focus{
     max-width: 50px;
     max-height: 50px;
 }
+
+
+/* TEXTAREA CONTENT */
+.richtext{
+    width: 100%;
+}
+
+.richtext ul, .richtext ol {
+  padding-left: 2em;
+}
+
+.richtext ul li, .richtext ol li {
+  margin-bottom: 0.5em;
+  text-indent: 0;
+}
+.richtext p{
+    margin: 0 0 1em 0;
+    line-height: 1.6;
+}
