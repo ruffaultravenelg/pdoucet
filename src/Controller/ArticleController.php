@@ -135,9 +135,6 @@ final class ArticleController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Add content
-            $article->setContent('');
-
             // Add dates
             $article->setDateCreated(new \DateTimeImmutable());
             $article->setDateModifed(new \DateTimeImmutable());
