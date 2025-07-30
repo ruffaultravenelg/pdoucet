@@ -41,18 +41,22 @@
                 <p>Site web</p>
                 <a href="{{ path('legal') }}">Mentions légales</a>
                 {% if is_admin() %}
-                    <a href="/logout">Se déconnecter</a>
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="{{ path('logout') }}">Se déconnecter</a>
+                    <a href="{{ path('dashboard') }}">Dashboard</a>
                 {% else %}
-                    <a href="/login">Connexion</a>
+                    <a href="{{ path('login') }}">Connexion</a>
                 {% endif %}
-                <a href="#">Copyright &copy; Pascal Doucet - 2025</a>
+                <a href="{{ path('legal') }}">Copyright &copy; Pascal Doucet - 2025</a>
             </div>
             <div>
                 <p>Réseaux sociaux</p>
-                <a href="#">@pascaldoucet</a>
-                <a href="#">/pdoucet</a>
-                <a href="#">@mieuxetre</a>
+                {% for i in 1..3 %}
+                    {% set link = setting('social' ~ i ~ '.link') %}
+                    {% set text = setting('social' ~ i ~ '.text') %}
+                    {% if link|trim and text|trim %}
+                        <a href="{{ link }}">{{ text }}</a>
+                    {% endif %}
+                {% endfor %}
             </div>
         </footer>
         
