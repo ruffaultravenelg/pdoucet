@@ -136,7 +136,6 @@ final class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Add dates
-            $article->setDateCreated(new \DateTimeImmutable());
             $article->setDateModifed(new \DateTimeImmutable());
 
             // If tag is empty

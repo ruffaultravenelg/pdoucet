@@ -22,12 +22,15 @@
     <h1>{{ article.title }}</h1>
     <p class="subtitle">{{ article.subtitle }}</h2> 
 
-    <div class="content">
+    <div class="content richtext">
         {{ article.content | raw }}
     </div>
 
     <p class="author">Écrit par {{ article.author }}</p>
+    {% if article.dateModifed|date('Y-m-d') != article.dateCreated|date('Y-m-d') %}
     <p class="modified">Modifié pour la dernière fois le {{ article.dateModifed | date('j/m/Y') }}</p>
+    {% endif %}
+    <p class="created">Écrit le {{ article.dateCreated | date('j/m/Y') }}</p>
 
     {% if is_admin() %}
         <div class="card-admin-actions">

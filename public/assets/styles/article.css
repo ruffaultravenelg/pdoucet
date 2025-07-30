@@ -36,3 +36,10 @@
     font-size: 0.9rem;
     margin-top: 10px;
 }
+
+.created{
+    text-align: right;
+    color: var(--color-placeholder);
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
