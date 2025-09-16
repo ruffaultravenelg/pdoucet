@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/news.css">
+{% endblock %}
+
+{% block body %}
+
+<main>
+    <h1>Actualités</h1>
+    <div class="actualites">
+
+        {% for news in pagination %}
+            <article class="actualite">
+                <p class="date">{{ news.date|date('d/m/Y') }}</p>
+                <h2>{{ news.title }}</h2>
+                <p class="richtext">{{ news.content|raw }}</p>
+            </article>
+        {% endfor %}
+
+    </div>
+
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</main>
+
+{% endblock %}
