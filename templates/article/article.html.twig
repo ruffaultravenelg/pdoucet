@@ -26,19 +26,32 @@
         {{ article.content | raw }}
     </div>
 
-    <p class="author">Écrit par {{ article.author }}</p>
-    {% if article.dateModifed|date('Y-m-d') != article.dateCreated|date('Y-m-d') %}
-    <p class="modified">Modifié pour la dernière fois le {{ article.dateModifed | date('j/m/Y') }}</p>
-    {% endif %}
-    <p class="created">Écrit le {{ article.dateCreated | date('j/m/Y') }}</p>
-
-    {% if is_admin() %}
-        <div class="card-admin-actions">
-            <a title="Modifier le contenu de l'article" class="btn btn-primary" href="{{ path('article_write', { id: article.id }) }}"><span>edit</span></a>
-            <a title="Modifier les informations de l'article" class="btn btn-primary" href="{{ path('article_edit', { id: article.id }) }}"><span>settings</span></a>
-            <button class="btn btn-danger confirmDialog" action="{{ path('article_delete', { id: article.id }) }}"><span>delete</span></button>
+    <div class="bottom-section">
+        <div>
+            {% if liked %}
+            <p class="likes liked"><span class="material-symbols-outlined">thumb_up</span>{{ likeCount }}</p>
+            {% else %}
+            <form method="post" action="{{ path('article_like', { id: article.id }) }}">
+                <button class="likes likable" type="submit" title="J'aime cet article"><span class="material-symbols-outlined">thumb_up</span>{{ likeCount }}</button>
+            </form>
+            {% endif %}
         </div>
-    {% endif %}
+        <div>
+            <p class="author">Écrit par {{ article.author }}</p>
+            {% if article.dateModifed|date('Y-m-d') != article.dateCreated|date('Y-m-d') %}
+            <p class="modified">Modifié pour la dernière fois le {{ article.dateModifed | date('j/m/Y') }}</p>
+            {% endif %}
+            <p class="created">Écrit le {{ article.dateCreated | date('j/m/Y') }}</p>
+
+            {% if is_admin() %}
+                <div class="card-admin-actions">
+                    <a title="Modifier le contenu de l'article" class="btn btn-primary" href="{{ path('article_write', { id: article.id }) }}"><span>edit</span></a>
+                    <a title="Modifier les informations de l'article" class="btn btn-primary" href="{{ path('article_edit', { id: article.id }) }}"><span>settings</span></a>
+                    <button class="btn btn-danger confirmDialog" action="{{ path('article_delete', { id: article.id }) }}"><span>delete</span></button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
 </main>
 

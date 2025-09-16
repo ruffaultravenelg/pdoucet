@@ -26,6 +26,7 @@
                 <th>ID</th>
                 <th>Titre</th>
                 <th>Nombre de visites</th>
+                <th>Nombre de likes</th>
             </tr>
         </thead>
         <tbody>
@@ -34,10 +35,11 @@
                     <td>{{ article.id }}</td>
                     <td><a href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></td>
                     <td>{{ article.visitCount }}</td>
+                    <td>{{ article.likeCount }}</td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="3">Aucun article trouvé.</td>
+                    <td colspan="4">Aucun article trouvé.</td>
                 </tr>
             {% endfor %}
         </tbody>

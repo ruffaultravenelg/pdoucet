@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\ArticleLike;
 use App\Form\ArticleType;
 use App\Service\AdminService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -64,7 +65,7 @@ final class ArticleController extends AbstractController
     }
     
     #[Route('/article/{id}/view', name: 'article')]
-    public function article(Article $article, AdminService $adminService, EntityManagerInterface $em): Response
+    public function article(Article $article, AdminService $adminService, EntityManagerInterface $em, Request $request): Response
     {
 
         // Check if article is visible
@@ -78,9 +79,54 @@ final class ArticleController extends AbstractController
                 ->execute();
         }
 
+        $likeCount = $em->createQuery('SELECT COUNT(l.id) FROM App\Entity\ArticleLike l WHERE l.Article = :article')
+            ->setParameter('article', $article)
+            ->getSingleScalarResult();
+
+        $liked = $this->doUserLikedArticle($article, $request->getClientIp(), $em);
+
         return $this->render('article/article.html.twig', [
             'article' => $article,
+            'likeCount' => $likeCount,
+            'liked' => $liked
         ]);
+    }
+
+    #[Route('/article/{id}/like', name: 'article_like')]
+    public function like_article(Request $request, EntityManagerInterface $em): Response
+    {
+        $ipAddress = $request->getClientIp();
+
+        // Find article
+        $article = $em->getRepository(Article::class)->find($request->attributes->get('id'));
+
+        // Check if the user has already liked the article
+        $existingLike = $this->doUserLikedArticle($article, $ipAddress, $em);
+
+        if ($existingLike) {
+            // User has already liked the article, do nothing
+            return $this->redirectToRoute('article', ['id' => $article->getId()]);
+        }
+
+        // Create a new like
+        $like = new ArticleLike();
+        $like->setArticle($article);
+        $like->setIpAddress($ipAddress);
+        $like->setDate(new \DateTimeImmutable());
+
+        $em->persist($like);
+        $em->flush();
+
+        return $this->redirectToRoute('article', ['id' => $article->getId()]);
+    }
+
+    private function doUserLikedArticle(Article $article, string $ipAddress, EntityManagerInterface $em): bool
+    {
+        $existingLike = $em->getRepository(ArticleLike::class)->findOneBy([
+            'Article' => $article,
+            'ip_address' => $ipAddress,
+        ]);
+        return $existingLike !== null;
     }
 
     #[Route('/article/{id}/delete', name: 'article_delete')]

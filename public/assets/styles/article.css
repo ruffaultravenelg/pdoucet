@@ -23,11 +23,52 @@
     font-size: 1.2rem;
 }
 
+.bottom-section{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+}
+
+.likes{
+    color: var(--color-black);
+    font-size: 0.9rem;
+}
+.likes span{
+    vertical-align: middle;
+    font-size: 1.2rem;
+    margin-right: 5px;
+    user-select: none;
+}
+.likable{
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    transition-duration: 0.2s;
+    padding: 10px 20px;
+    transform: translate(-20px, -10px);
+}
+.likable:hover{
+    background-color: var(--color-whitesmoke);
+    transform: translate(-20px, -10px) scale(1.05);
+}
+.likable:active{
+    background-color: var(--color-whitesmoke);
+    transform: translate(-20px, -10px) scale(0.95);
+}
+.liked{
+    color: var(--color-primary);
+}
+
 .author{
     text-align: right;
     color: var(--color-primary);
     font-size: 1rem;
-    margin-top: 30px;
 }
 
 .modified{

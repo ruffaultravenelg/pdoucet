@@ -38,6 +38,7 @@ final class StatisticsController extends AbstractController
                 'id' => $article->getId(),
                 'title' => $article->getTitle(),
                 'visitCount' => $article->getVisitCount(),
+                'likeCount' => $article->getArticleLikes()->count(),
             ];
             array_push($articleTable, $row);
         }

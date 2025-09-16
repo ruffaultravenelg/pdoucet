@@ -214,45 +214,53 @@ section.depeche{
 .depeche-container{
     width: 100%;
     display: flex;
-    align-items: start;
-    gap: var(--page-padding);
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
 }
-section.depeche ul{
-    width: 100%;
-}
-section.depeche li{
-    margin-top: 20px;
+.depeche-container li{
     list-style: none;
-    display: flex;
-    align-items: center;
+    max-width: calc(50% - 8px);
+    min-width: calc(50% - 8px);
+    position: relative;
 }
-section.depeche li > span{
-    margin-right: 10px;
+.depeche-date{
+    font-size: 0.8rem;
+    color: var(--color-placeholder);
 }
-section.depeche li > a{
+.depeche-text{
+    margin-top: -5px;
+}
+.depeche-container li > a{
     text-decoration: none;
     color: red;
-    margin-left: 10px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    transition-duration: 0.2s;
+    padding: 3px;
+    border-radius: 5px;
+}
+.depeche-container li > a:hover{
+    background-color: white;
 }
 
 section.depeche a.add{
     position: absolute;
-    bottom: calc(var(--page-padding) / 2);
-    left: 50%;
-    transform: translateX(-50%);
+    top: var(--page-padding);
+    right: var(--page-padding);
 }
 
 @media screen and (max-width: 850px) {
-    section.depeche{
+    .depeche-container{
         flex-direction: column;
-        text-align: center;
+        flex-wrap: nowrap;
     }
-    section.depeche a.add{
-        position: initial;
-        margin-top: 20px;
-        width: 100%;
-        text-align: center;
-        transform: none;
+    .depeche-container li{
+        max-width: 100%;
+        min-width: 100%;
+        text-align: justify;
     }
 }
 

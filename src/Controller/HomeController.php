@@ -32,15 +32,10 @@ final class HomeController extends AbstractController
         $heartPic = $em->getRepository(HeartPic::class)->findBy([], ['id' => 'DESC'], 7);
 
         // Get positive & negative depeches
-        $positiveDepeches = $em->getRepository(Depeche::class)->findBy(
-            ['is_positive' => true],
+        $depeches = $em->getRepository(Depeche::class)->findBy(
+            [],
             ['date' => 'DESC'],
-            7
-        );
-        $negativeDepeches = $em->getRepository(Depeche::class)->findBy(
-            ['is_positive' => false],
-            ['date' => 'DESC'],
-            7
+            14
         );
 
         // Get links
@@ -59,8 +54,7 @@ final class HomeController extends AbstractController
         // Render
         return $this->render('home/index.html.twig', [
             'heartPics' => $heartPic,
-            'positiveDepeches' => $positiveDepeches,
-            'negativeDepeches' => $negativeDepeches,
+            'depeches' => $depeches,
             'links' => $links,
             'lastArticle' => $lastArticle,
         ]);

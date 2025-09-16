@@ -17,9 +17,6 @@ class Depeche
     private ?string $text = null;
 
     #[ORM\Column]
-    private ?bool $is_positive = null;
-
-    #[ORM\Column]
     private ?\DateTimeImmutable $date = null;
 
     public function getId(): ?int
@@ -35,18 +32,6 @@ class Depeche
     public function setText(string $text): static
     {
         $this->text = $text;
-
-        return $this;
-    }
-
-    public function isPositive(): ?bool
-    {
-        return $this->is_positive;
-    }
-
-    public function setIsPositive(bool $is_positive): static
-    {
-        $this->is_positive = $is_positive;
 
         return $this;
     }

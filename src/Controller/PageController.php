@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\IndexLink;
 use App\Entity\Page;
 use App\Form\PageType;
 use App\Service\AdminService;
@@ -34,7 +35,13 @@ final class PageController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
+        $indexLinks = $em->getRepository(IndexLink::class)->findBy(['page' => $page]);
+        foreach ($indexLinks as $indexLink) {
+            $em->remove($indexLink);
+        }
+
         $em->remove($page);
+    
         $em->flush();
 
         return $this->redirectToRoute('pages');

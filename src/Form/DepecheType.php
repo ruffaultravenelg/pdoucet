@@ -23,13 +23,6 @@ class DepecheType extends AbstractType
                     'class' => 'field',
                 ],
             ])
-            ->add('is_positive', CheckboxType::class, [
-                'label' => 'Bonne nouvelle',
-                'attr' => [
-                    'class' => 'field-switch',
-                ],
-                'required' => false,
-            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
             ])

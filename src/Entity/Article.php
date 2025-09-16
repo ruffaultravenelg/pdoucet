@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -39,6 +41,17 @@ class Article
 
     #[ORM\Column(options: ["default" => 0])]
     private int $visitCount = 0;
+
+    /**
+     * @var Collection<int, ArticleLike>
+     */
+    #[ORM\OneToMany(targetEntity: ArticleLike::class, mappedBy: 'Article', orphanRemoval: true)]
+    private Collection $articleLikes;
+
+    public function __construct()
+    {
+        $this->articleLikes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -149,6 +162,36 @@ class Article
     public function setVisitCount(int $visitCount): static
     {
         $this->visitCount = $visitCount;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ArticleLike>
+     */
+    public function getArticleLikes(): Collection
+    {
+        return $this->articleLikes;
+    }
+
+    public function addArticleLike(ArticleLike $articleLike): static
+    {
+        if (!$this->articleLikes->contains($articleLike)) {
+            $this->articleLikes->add($articleLike);
+            $articleLike->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticleLike(ArticleLike $articleLike): static
+    {
+        if ($this->articleLikes->removeElement($articleLike)) {
+            // set the owning side to null (unless already changed)
+            if ($articleLike->getArticle() === $this) {
+                $articleLike->setArticle(null);
+            }
+        }
 
         return $this;
     }
