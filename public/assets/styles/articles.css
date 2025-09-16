@@ -1,3 +1,33 @@
+section.articles{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--page-padding) / 2);
+}
+
+/* NAVBAR */
+.articles-navbar{
+    width: 100%;
+    max-width: 400px;
+}
+#search{
+    width: 100%;
+}
+#navbar-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+#navbar-tags .article-tag{
+    user-select: none;
+    cursor: pointer;
+}
+
+/* ARTICLES */
+.articles-wrapper{
+    width: 100%;
+}
 .articles-container{
     width: 100%;
     display: flex;

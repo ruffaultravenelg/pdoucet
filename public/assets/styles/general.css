@@ -404,6 +404,15 @@ body h2:first-child{
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--main-color), transparent 60%);
 }
 
+.form-switch-description{
+    width: 100%;
+    max-width: 700px;
+    margin-top: 8px;
+    color: var(--color-placeholder);
+    font-size: 0.85rem;
+    transform: translateY(-35px);
+}
+
 /* FOOTER */
 footer{
     width: 100%;

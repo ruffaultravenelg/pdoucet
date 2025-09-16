@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Page;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -75,6 +76,14 @@ class PageType extends AbstractType
                 'label' => $options['submit_label'],
             ])
         ;
+
+        if ($options['delete_image']) {
+            $builder->add('deleteImage', CheckboxType::class, [
+                'label' => 'Supprimer l\'image actuelle',
+                'required' => false,
+                'mapped' => false,
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -83,6 +92,7 @@ class PageType extends AbstractType
             'data_class' => Page::class,
             'submit_label' => 'Enregistrer',
             'image_label' => 'Image d\'en-tête',
+            'delete_image' => false,
         ]);
     }
 }

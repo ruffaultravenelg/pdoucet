@@ -90,18 +90,22 @@ final class PageController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $form = $this->createForm(PageType::class, $page, ['submit_label' => 'Modifier']);
+        $canDeleteImage = $page->getHeaderImage() ? true : false;
+        $form = $this->createForm(PageType::class, $page, ['submit_label' => 'Modifier', 'image_label' => 'Selectionner une nouvelle image', 'delete_image' => $canDeleteImage]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Handle file upload
+            // Handle file upload and deletion
             $image = $form->get('headerImage')->getData();
-            if ($image) {
-                $fileHandler->delete($page->getHeaderImage()); // Remove old file if exist
-                $filename = $fileHandler->upload($image);
-                $page->setHeaderImage($filename);
+            $remove = $canDeleteImage ? $form->get('deleteImage')->getData() : false;
+
+            if ($remove) {
+                $page->setHeaderImage(null);
+            } elseif ($image !== null) {
+                $fileHandler->delete($page->getHeaderImage());
+                $page->setHeaderImage($fileHandler->upload($image));
             }
 
             // Update dates

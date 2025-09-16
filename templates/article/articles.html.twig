@@ -6,48 +6,72 @@
 <link rel="stylesheet" href="/assets/styles/articles.css">
 {% endblock %}
 
+{% block javascripts %}
+<script src="/assets/js/articles.js"></script>
+{% endblock %}
+
 {% block body %}
 <main>
 
     <h1>Articles</h1>
-    <p class="subtitle">Liste des articles</h2>
+    <p class="subtitle">Liste des articles</p>
 
-    <div class="articles-container">
-        {% for article in articles %}
+    <section class="articles">
+        
+        <!-- SEARCH && TAGS FILTER -->
+        <div class="articles-navbar">
+            <input id="search" placeholder="Rechercher un article" type="text" class="field">
 
-            <a class="article-card" href="{{ path('article', {id: article.id}) }}">
-                <p class="article-card-date">{{ article.dateCreated | date('d/m/Y') }}</p>
-                <p class="article-card-title">{{ article.title }}</p>
-                <p class="article-card-subtitle">{{ article.subtitle }}</p>
+            <div id="navbar-tags">
+                {% for tag in all_tags %}
+                    {% if tag != '' %}
+                        <span class="article-tag">{{ tag }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
 
-                {% if article.tags is not empty %}
-                    <p class="article-card-tags">
-                        {% for tag in article.tags|split(',') %}
-                            {% if tag|trim is not empty %}
-                                <span class="article-tag">{{ tag|trim }}</span>
-                            {% endif %}
-                        {% endfor %}
-                    </p>
-                {% endif %}
-            </a>
+        <!-- RESULT -->
+        <div class="articles-wrapper">
+            <div class="articles-container">
+                {% for article in articles %}
 
-        {% endfor %}
-    </div>
+                    <a class="article-card" href="{{ path('article', {id: article.id}) }}">
+                        <p class="article-card-date">{{ article.dateCreated | date('d/m/Y') }}</p>
+                        <p class="article-card-title">{{ article.title }}</p>
+                        <p class="article-card-subtitle">{{ article.subtitle }}</p>
 
-    {% if hiddenArticles is not empty %} <!-- hiddenArticles is alway empty when not admin -->
-    <p class="hidden-articles">Articles cachés</p>
-    <div class="articles-container">
-        {% for article in hiddenArticles %}
+                        {% if article.tags is not empty %}
+                            <p class="article-card-tags">
+                                {% for tag in article.tags|split(',') %}
+                                    {% if tag|trim is not empty %}
+                                        <span class="article-tag">{{ tag|trim }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                        {% endif %}
+                    </a>
 
-            <a class="article-card hidden" href="{{ path('article', {id: article.id}) }}">
-                <p class="article-card-date">{{ article.dateCreated | date('d/m/Y') }}</p>
-                <p class="article-card-title">{{ article.title }}</p>
-                <p class="article-card-subtitle">{{ article.subtitle }}</p>
-            </a>
+                {% endfor %}
+            </div>
 
-        {% endfor %}
-    </div>
-    {% endif %}
+            {% if hiddenArticles is not empty %} <!-- hiddenArticles is alway empty when not admin -->
+            <p class="hidden-articles">Articles cachés</p>
+            <div class="articles-container">
+                {% for article in hiddenArticles %}
+
+                    <a class="article-card hidden" href="{{ path('article', {id: article.id}) }}">
+                        <p class="article-card-date">{{ article.dateCreated | date('d/m/Y') }}</p>
+                        <p class="article-card-title">{{ article.title }}</p>
+                        <p class="article-card-subtitle">{{ article.subtitle }}</p>
+                    </a>
+
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+    </section>
 
     {% if is_admin() %}
         <a class="btn btn-primary" id="new_article" href="{{ path('article_create') }}"><span>post_add</span></a>

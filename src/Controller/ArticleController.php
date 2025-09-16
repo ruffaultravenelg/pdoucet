@@ -35,9 +35,30 @@ final class ArticleController extends AbstractController
             );
         }
 
+        $all_tags = [];
+        foreach ($articles as $article) {
+            $tags = explode(',', $article->getTags());
+            foreach ($tags as $tag) {
+                $tag = trim($tag);
+                if (!in_array($tag, $all_tags)) {
+                    $all_tags[] = $tag;
+                }
+            }
+        }
+        foreach ($hiddenArticles as $article) {
+            $tags = explode(',', $article->getTags());
+            foreach ($tags as $tag) {
+                $tag = trim($tag);
+                if (!in_array($tag, $all_tags)) {
+                    $all_tags[] = $tag;
+                }
+            }
+        }
+
         return $this->render('article/articles.html.twig', [
             'articles' => $articles,
             'hiddenArticles' => $hiddenArticles,
+            'all_tags' => $all_tags,
         ]);
 
     }
