@@ -1,12 +1,14 @@
 main{
     padding: var(--page-padding);
     background-color: var(--color-whitesmoke);
+    background-image: radial-gradient(circle, #e0e0e0 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
     width: 100%;
     position: relative;
 }
 
 .actualites{
-    margin-top: var(--page-padding);
+    margin-top: 60px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -22,6 +24,12 @@ main{
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
     border-radius: 20px;
     position: relative;
+    overflow-x: auto;
+}
+@media screen and (max-width: 850px) {
+    .actualite{
+        border-radius: 10px;
+    }
 }
 .actualite .date{
     font-size: 0.9rem;
