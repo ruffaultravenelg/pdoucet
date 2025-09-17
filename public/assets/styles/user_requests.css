@@ -7,10 +7,3 @@ section.landing{
 section.landing p.subtitle{
     margin-bottom: 0;
 }
-
-/* TABLE */
-td[colspan="3"] {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-placeholder);
-}

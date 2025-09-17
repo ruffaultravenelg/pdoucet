@@ -29,6 +29,9 @@ class UserRequest
     #[ORM\ManyToOne(inversedBy: 'userRequests')]
     private ?Product $product = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $dateCreated = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class UserRequest
     public function setProduct(?Product $product): static
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function getDateCreated(): ?\DateTimeImmutable
+    {
+        return $this->dateCreated;
+    }
+
+    public function setDateCreated(\DateTimeImmutable $dateCreated): static
+    {
+        $this->dateCreated = $dateCreated;
 
         return $this;
     }

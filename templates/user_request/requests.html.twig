@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/user_requests.css">
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+
+{% block body %}
+
+<section class="landing">
+    <h1>Messages</h1>
+    <p class="subtitle">Liste de toute les requêtes des visiteurs</p>
+</section>
+
+<main>
+
+    <!-- ARTICLE VIEWS -->
+    <h2 class="highlighter">Liste des requêtes sur les produits</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Produit</th>
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.product is null ? '/' : request.product.name }}</td>
+                    <td>{{ request.name }}</td>
+                    <td>{{ request.tel }}</td>
+                    <td>{{ request.email }}</td>
+                    <td>{{ request.dateCreated|date('Y/m/d - H\\hi') }}</td>
+                    <td><a href="{{ path('request', { 'id': request.id }) }}">Voir</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucune demande</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</main>
+
+{% endblock %}

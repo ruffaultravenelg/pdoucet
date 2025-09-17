@@ -523,3 +523,47 @@ footer a:hover, footer a:focus{
     text-decoration: underline;
     text-decoration-color: var(--color-primary);
 }
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+th {
+    font-weight: bold;
+    position: relative;
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--color-whitesmoke);
+}
+
+tbody tr:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+td {
+    color: var(--color-black);
+}
+
+td a{
+    text-decoration: none;
+    color: var(--color-black);
+    cursor: pointer;
+}

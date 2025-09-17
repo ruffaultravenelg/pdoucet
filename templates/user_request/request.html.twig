@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/user_request.css">
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <a id="back" class="btn btn-primary" href="{{ path('requests') }}"><span>arrow_back</span></a>
+
+    <div class="container">
+        <div class="ticket">
+
+            <p class="propertie">Identifiant</p>
+            <p class="value">{{ request.id }}</p>
+            <p class="propertie">Nom et prénom</p>
+            <p class="value">{{ request.name }}</p>
+            <p class="propertie">Téléphone</p>
+            <p class="value">{{ request.tel is not empty ? request.tel : '/' }}</p>
+            <p class="propertie">Adresse email</p>
+            <p class="value">{{ request.email is not empty ? request.email : '/' }}</p>
+            <p class="propertie">Messages</p>
+            <div class="value richtext">{{ request.message is not empty ? request.message | raw : '/' }}</div>
+            <p class="propertie">Date de création</p>
+            <p class="value">{{ request.dateCreated|date('Y/m/d - H\\hi s\\s') }}</p>
+            <p class="propertie">Produit associé</p>
+            <p class="value">{{ request.product ? request.product.name : 'Aucun produit associé' }}</p>
+
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

@@ -119,12 +119,4 @@ final class ProductController extends AbstractController
         return $this->redirectToRoute('products');
     }
 
-    // Product request
-    #[Route('/product/{id}/request', name: 'product_request')]
-    public function product_request(EntityManagerInterface $em, AdminService $adminService, Product $product): Response
-    {
-        // Render request form
-        return new Response('not implemented');
-    }
-
 }

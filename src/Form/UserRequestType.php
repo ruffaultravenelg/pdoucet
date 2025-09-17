@@ -51,7 +51,7 @@ class UserRequestType extends AbstractType
                 'required' => false,
             ])
             ->add('message', TextareaType::class, [
-                'label' => 'Message',
+                'label' => $options['message_label'],
                 'attr' => [
                     'class' => 'tinymce',
                 ],
@@ -77,6 +77,7 @@ class UserRequestType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => UserRequest::class,
+            'message_label' => 'Message',
         ]);
     }
 }
