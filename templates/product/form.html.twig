@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une page{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/admin_form.css">
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/js/tinymce.js"></script>
+{% endblock %}
+
+{% block body %}
+<main>
+
+    <h1>{{ title }}</h1>
+    <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
+
+    {{ form_start(form) }}
+
+    <div class="form-field required">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+    </div>
+    
+    <div class="form-field">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <div class="form-field">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image) }}
+        {{ form_errors(form.image) }}
+    </div>
+
+    <div class="form-field form-switch-field">
+        {{ form_label(form.request_form) }}
+        <label class="field-switch">
+            {{ form_widget(form.request_form) }}
+            <span class="field-switch-slider"></span>
+        </label>
+        {{ form_errors(form.request_form) }}
+    </div>
+
+    <div class="form-actions">
+        <a href="{{ path('products') }}" class="btn btn-secondary">Annuler</a>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    
+    {{ form_end(form) }}
+
+</main>
+
+{% endblock %}

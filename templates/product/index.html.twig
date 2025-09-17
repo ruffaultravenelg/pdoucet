@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Services{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/products.css">
+{% endblock %}
+
+{% block body %}
+<main>
+
+    <!-- LANDING -->
+    <h1>Services</h1>
+    <p class="subtitle">Liste des services</p>
+
+    <!-- PRODUCTS -->
+    <div class="products">
+        {% for product in products %}
+        <div class="product{% if loop.index is even %} reversed-row{% endif %}">
+            <img src="{{ file(product.image) }}" alt="{{ product.name }}">
+
+            <div>
+                <p class="product-name">{{ product.name }}</p>
+                <div class="product-description richtext">
+                    {{ product.description|raw }}
+                </div>
+                <div class="product-buttons">
+                {% if product.requestForm %}
+                    <a class="btn btn-primary" href="{{ path('product_request', { id: product.id }) }}"><span>add_shopping_cart</span>Je suis intéressé</a>
+                {% endif %}
+                </div>
+            </div>
+
+            {% if is_admin() %}
+            <div class="news-admin-actions">
+                <a class="btn btn-primary" href="{{ path('product_edit', { id: product.id }) }}"><span>edit</span></a>
+                <button class="btn btn-danger confirmDialog" action="{{ path('news_delete', { id: product.id }) }}"><span>delete</span></button>
+            </div>
+            {% endif %}
+
+        </div>
+        {% else %}
+            <p class="no-product">Aucun service disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+
+    <!-- ADD BUTTON -->
+    {% if is_admin() %}
+        <a class="btn btn-primary" id="new_product" href="{{ path('product_create') }}"><span>post_add</span></a>
+    {% endif %}
+
+</main>
+{% endblock %}
