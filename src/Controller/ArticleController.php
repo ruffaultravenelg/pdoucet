@@ -50,7 +50,7 @@ final class ArticleController extends AbstractController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            2
+            10
         );
 
         return $this->render('article/articles.html.twig', [

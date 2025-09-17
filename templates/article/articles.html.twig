@@ -24,6 +24,7 @@
 
         {{ form_widget(form.q) }}
 
+        {% if attribute(form, 'h') is defined %}
         <div class="form-field form-switch-field">
             {{ form_label(form.h) }}
             <label class="field-switch">
@@ -31,7 +32,8 @@
                 <span class="field-switch-slider"></span>
             </label>
         </div>
-        
+        {% endif %}
+
         {{ form_end(form) }}
 
         <!-- RESULT -->
