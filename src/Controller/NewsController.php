@@ -17,12 +17,14 @@ final class NewsController extends AbstractController
     #[Route('/news', name: 'news')]
     public function index(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $em->getRepository(News::class)->createQueryBuilder('n');
+        $query = $em->getRepository(News::class)
+            ->createQueryBuilder('n')
+            ->orderBy('n.date', 'DESC');
 
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            10
+            2
         );
 
         return $this->render('news/index.html.twig', [

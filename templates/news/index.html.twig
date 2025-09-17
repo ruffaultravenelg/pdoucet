@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script type="module" src="/assets/js/confirmDialog.js"></script>
+<script type="module" src="/assets/js/confirmDialog.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -39,9 +39,7 @@
 
     </div>
 
-    <div class="pagination">
-        {{ knp_pagination_render(pagination) }}
-    </div>
+    {{ knp_pagination_render(pagination) }}
 
     {% if is_admin() %}
         <a class="btn btn-primary" id="new_news" href="{{ path('news_create') }}"><span>post_add</span></a>

@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\ArticleLike;
+use App\Form\ArticleSearchType;
 use App\Form\ArticleType;
 use App\Service\AdminService;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,48 +20,43 @@ final class ArticleController extends AbstractController
 {
 
     #[Route('/articles', name: 'articles')]
-    public function articles(EntityManagerInterface $em, AdminService $adminService): Response
+    public function articles(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request, AdminService $adminService): Response
     {
 
+        $form = $this->createForm(ArticleSearchType::class, null, ['csrf_protection' => false, 'allow_extra_fields' => true, 'is_admin' => $adminService->isAdmin()]);
+        $form->handleRequest($request);
+
         // Get articles
-        $articles = $em->getRepository(Article::class)->findBy(
-            ['visible' => true],
-            ['date_modifed' => 'DESC']
+        $query = $em->getRepository(Article::class)
+            ->createQueryBuilder('a');
+
+        $visibility = true;
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->get('q')->getData();
+            if ($search) {
+                $query->where('a.title LIKE :search OR a.tags LIKE :search')
+                ->setParameter('search', '%'.$search.'%');
+            }
+            if ($adminService->isAdmin() && $form->get('h')->getData()) {
+                $visibility = false;
+            }
+        }
+        
+        $query
+            ->andWhere('a.visible = :visible')
+            ->setParameter('visible', $visibility)
+            ->orderBy('a.date_modifed', 'DESC');
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            2
         );
 
-        // If admin, get hidden articles
-        $hiddenArticles = [];
-        if ($adminService->isAdmin()) {
-            $hiddenArticles = $em->getRepository(Article::class)->findBy(
-                ['visible' => false],
-                ['date_modifed' => 'DESC']
-            );
-        }
-
-        $all_tags = [];
-        foreach ($articles as $article) {
-            $tags = explode(',', $article->getTags());
-            foreach ($tags as $tag) {
-                $tag = trim($tag);
-                if (!in_array($tag, $all_tags)) {
-                    $all_tags[] = $tag;
-                }
-            }
-        }
-        foreach ($hiddenArticles as $article) {
-            $tags = explode(',', $article->getTags());
-            foreach ($tags as $tag) {
-                $tag = trim($tag);
-                if (!in_array($tag, $all_tags)) {
-                    $all_tags[] = $tag;
-                }
-            }
-        }
-
         return $this->render('article/articles.html.twig', [
-            'articles' => $articles,
-            'hiddenArticles' => $hiddenArticles,
-            'all_tags' => $all_tags,
+            'pagination' => $pagination,
+            'form' => $form->createView(),
+            'showHiddenArticles' => !$visibility,
         ]);
 
     }

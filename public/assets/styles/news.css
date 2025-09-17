@@ -53,24 +53,6 @@ main{
     max-height: 50px;
 }
 
-.pagination{
-    width: 100%;
-    text-align: center;
-    margin-top: var(--page-padding);
-    color: var(--color-black);
-    font-size: 1.1rem;
-    user-select: none;
-}
-.pagination a{
-    user-select: auto;
-    color: var(--color-black);
-    text-decoration: none;
-}
-.pagination a:hover{
-    text-decoration: underline;
-    text-decoration-color: var(--color-primary);
-}
-
 #new_news{
     position: absolute;
     top: var(--page-padding);

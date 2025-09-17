@@ -487,7 +487,6 @@ footer a:hover, footer a:focus{
     max-height: 50px;
 }
 
-
 /* TEXTAREA CONTENT */
 .richtext{
     width: 100%;
@@ -504,4 +503,23 @@ footer a:hover, footer a:focus{
 .richtext p{
     margin: 0 0 1em 0;
     line-height: 1.6;
+}
+
+/* PAGINATION */
+.pagination{
+    width: 100%;
+    text-align: center;
+    margin-top: var(--page-padding);
+    color: var(--color-black);
+    font-size: 1.1rem;
+    user-select: none;
+}
+.pagination a{
+    user-select: auto;
+    color: var(--color-black);
+    text-decoration: none;
+}
+.pagination a:hover{
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary);
 }
