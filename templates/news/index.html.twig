@@ -6,17 +6,34 @@
 <link rel="stylesheet" href="/assets/styles/news.css">
 {% endblock %}
 
+{% block javascripts %}
+    <script type="module" src="/assets/js/confirmDialog.js"></script>
+{% endblock %}
+
 {% block body %}
 
 <main>
     <h1>Actualités</h1>
+
     <div class="actualites">
 
         {% for news in pagination %}
             <article class="actualite">
+
                 <p class="date">{{ news.date|date('d/m/Y') }}</p>
                 <h2>{{ news.title }}</h2>
-                <p class="richtext">{{ news.content|raw }}</p>
+                
+                <div class="richtext">
+                    {{ news.content | raw }}
+                </div>
+
+                {% if is_admin() %}
+                <div class="news-admin-actions">
+                    <a class="btn btn-primary" href="{{ path('news_edit', { id: news.id }) }}"><span>edit</span></a>
+                    <button class="btn btn-danger confirmDialog" action="{{ path('news_delete', { id: news.id }) }}"><span>delete</span></button>
+                </div>
+                {% endif %}
+
             </article>
         {% endfor %}
 
@@ -25,6 +42,11 @@
     <div class="pagination">
         {{ knp_pagination_render(pagination) }}
     </div>
+
+    {% if is_admin() %}
+        <a class="btn btn-primary" id="new_news" href="{{ path('news_create') }}"><span>post_add</span></a>
+    {% endif %}
+
 </main>
 
 {% endblock %}

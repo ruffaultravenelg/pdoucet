@@ -2,6 +2,7 @@ main{
     padding: var(--page-padding);
     background-color: var(--color-whitesmoke);
     width: 100%;
+    position: relative;
 }
 
 .actualites{
@@ -20,6 +21,7 @@ main{
     padding: 1.5rem;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
     border-radius: 20px;
+    position: relative;
 }
 .actualite .date{
     font-size: 0.9rem;
@@ -29,11 +31,26 @@ main{
     font-size: 1.5rem;
     color: var(--color-primary);
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 .actualite .richtext{
     color: var(--color-text);
     font-size: 1rem;
+}
+
+.news-admin-actions{
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+}
+.news-admin-actions > *{
+    padding: 15px;
+    max-width: 50px;
+    max-height: 50px;
 }
 
 .pagination{
@@ -52,4 +69,10 @@ main{
 .pagination a:hover{
     text-decoration: underline;
     text-decoration-color: var(--color-primary);
+}
+
+#new_news{
+    position: absolute;
+    top: var(--page-padding);
+    right: var(--page-padding);
 }

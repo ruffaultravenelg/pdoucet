@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/admin_form.css">
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/js/tinymce.js"></script>
+{% endblock %}
+
+{% block body %}
+
+<main>
+    
+    <h1>{{ title }}</h1>
+    <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
+
+    {{ form_start(form) }}
+    
+    <div class="form-field requiered">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
+    </div>
+
+    <div class="form-field requiered">
+        {{ form_label(form.content) }}
+        {{ form_errors(form.content) }}
+        {{ form_widget(form.content) }}
+    </div>
+    
+    <div class="form-actions">
+        <a href="{{ path('news') }}" class="btn btn-secondary">Annuler</a>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    
+    {{ form_end(form) }}
+
+</main>
+
+{% endblock %}
