@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="/assets/styles/products.css">
 {% endblock %}
 
+{% block javascripts %}
+{% if is_admin() %}
+<script type="module" src="/assets/js/confirmDialog.js"></script>
+{% endif %}
+{% endblock %}
+
 {% block body %}
 <main>
 
@@ -26,7 +32,7 @@
                 </div>
                 <div class="product-buttons">
                 {% if product.requestForm %}
-                    <a class="btn btn-primary" href="{{ path('product_request', { id: product.id }) }}"><span>add_shopping_cart</span>Je suis intéressé</a>
+                    <a class="btn btn-primary" href="{{ path('request_create') }}?productId={{ product.id }}"><span>add_shopping_cart</span>Je suis intéressé</a>
                 {% endif %}
                 </div>
             </div>
@@ -34,7 +40,7 @@
             {% if is_admin() %}
             <div class="news-admin-actions">
                 <a class="btn btn-primary" href="{{ path('product_edit', { id: product.id }) }}"><span>edit</span></a>
-                <button class="btn btn-danger confirmDialog" action="{{ path('news_delete', { id: product.id }) }}"><span>delete</span></button>
+                <button class="btn btn-danger confirmDialog" action="{{ path('product_delete', { id: product.id }) }}"><span>delete</span></button>
             </div>
             {% endif %}
 

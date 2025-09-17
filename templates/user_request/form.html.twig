@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter une page{% endblock %}
+{% block title %}Contacter{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="/assets/styles/admin_form.css">
-<link rel="stylesheet" href="/assets/styles/page_form.css">
 {% endblock %}
 
 {% block javascripts %}
@@ -12,46 +11,45 @@
 {% endblock %}
 
 {% block body %}
-
 <main>
 
-    <h1>Ajouter une page</h1>
+    <h1>Contacter</h1>
     <p class="subtitle"><span style="color: red">*</span> Champs obligatoires</p>
 
     {{ form_start(form) }}
+
+    <div class="form-field required">
+        {{ form_label(form.product) }}
+        {{ form_widget(form.product) }}
+        {{ form_errors(form.product) }}
+    </div>
 
     <div class="form-field required">
         {{ form_label(form.name) }}
         {{ form_widget(form.name) }}
         {{ form_errors(form.name) }}
     </div>
-    
-    <div class="form-field">
-        {{ form_label(form.subtitle) }}
-        {{ form_widget(form.subtitle) }}
-        {{ form_errors(form.subtitle) }}
-    </div>
 
-    <div class="form-field required">
-        {{ form_label(form.slug) }}
-        {{ form_widget(form.slug) }}
-        {{ form_errors(form.slug) }}
-    </div>
-    
     <div class="form-field">
-        {{ form_label(form.headerImage) }}
-        {{ form_widget(form.headerImage) }}
-        {{ form_errors(form.headerImage) }}
+        {{ form_label(form.tel) }}
+        {{ form_widget(form.tel) }}
+        {{ form_errors(form.tel) }}
     </div>
 
     <div class="form-field">
-        {{ form_label(form.content) }}
-        {{ form_errors(form.content) }}
-        {{ form_widget(form.content) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
     </div>
     
+    <div class="form-field">
+        {{ form_label(form.message) }}
+        {{ form_widget(form.message) }}
+        {{ form_errors(form.message) }}
+    </div>
+
     <div class="form-actions">
-        <a href="{{ path('pages') }}" class="btn btn-secondary">Annuler</a>
+        <a href="javascript:history.back()" class="btn btn-secondary">Annuler</a>
         {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
     </div>
     

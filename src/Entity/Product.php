@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class Product
 
     #[ORM\Column]
     private ?bool $request_form = null;
+
+    /**
+     * @var Collection<int, UserRequest>
+     */
+    #[ORM\OneToMany(targetEntity: UserRequest::class, mappedBy: 'product')]
+    private Collection $userRequests;
+
+    public function __construct()
+    {
+        $this->userRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +88,36 @@ class Product
     public function setRequestForm(bool $request_form): static
     {
         $this->request_form = $request_form;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserRequest>
+     */
+    public function getUserRequests(): Collection
+    {
+        return $this->userRequests;
+    }
+
+    public function addUserRequest(UserRequest $userRequest): static
+    {
+        if (!$this->userRequests->contains($userRequest)) {
+            $this->userRequests->add($userRequest);
+            $userRequest->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRequest(UserRequest $userRequest): static
+    {
+        if ($this->userRequests->removeElement($userRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($userRequest->getProduct() === $this) {
+                $userRequest->setProduct(null);
+            }
+        }
 
         return $this;
     }

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Content;
-use App\Entity\HeaderLink;
 use App\Entity\Page;
 use App\Service\AdminService;
 use App\Service\SettingsService;
