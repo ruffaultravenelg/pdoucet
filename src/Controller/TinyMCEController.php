@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\AdminService;
 use App\Service\FileHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,8 +13,12 @@ final class TinyMCEController extends AbstractController
 {
 
     #[Route('/tinymce-upload', methods: ['POST'], name: 'tinymce_upload')]
-    public function tinymce_upload(Request $request, FileHandler $fileHandler): JsonResponse
+    public function tinymce_upload(Request $request, FileHandler $fileHandler, AdminService $adminService): JsonResponse
     {
+        if (!$adminService->isAdmin()){
+            return new JsonResponse(['error' => 'Unauthorized'], 403);
+        }
+
         $file = $request->files->get('file');
 
         if (!$file) {
