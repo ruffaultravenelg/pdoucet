@@ -23,24 +23,20 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Produit</th>
-                <th>Nom</th>
-                <th>Téléphone</th>
-                <th>Email</th>
                 <th>Date</th>
+                <th>Nom</th>
+                <th>Produit</th>
+                <th>Status</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             {% for request in requests %}
                 <tr>
-                    <td>{{ request.id }}</td>
-                    <td>{{ request.product is null ? '/' : request.product.name }}</td>
-                    <td>{{ request.name }}</td>
-                    <td>{{ request.tel }}</td>
-                    <td>{{ request.email }}</td>
                     <td>{{ request.dateCreated|date('Y/m/d - H\\hi') }}</td>
+                    <td>{{ request.name }}</td>
+                    <td>{{ request.product is null ? '/' : request.product.name }}</td>
+                    <td>{{ request.status.label() }}</td>
                     <td><a href="{{ path('request', { 'id': request.id }) }}">Voir</a></td>
                 </tr>
             {% else %}

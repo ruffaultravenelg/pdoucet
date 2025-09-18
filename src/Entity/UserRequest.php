@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\UserRequestStatus;
 use App\Repository\UserRequestRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,6 +32,15 @@ class UserRequest
 
     #[ORM\Column]
     private ?\DateTimeImmutable $dateCreated = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $dateClosed = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $note = null;
+
+    #[ORM\Column(enumType: UserRequestStatus::class)]
+    private ?UserRequestStatus $status = null;
 
     public function getId(): ?int
     {
@@ -105,6 +115,42 @@ class UserRequest
     public function setDateCreated(\DateTimeImmutable $dateCreated): static
     {
         $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getDateClosed(): ?\DateTimeImmutable
+    {
+        return $this->dateClosed;
+    }
+
+    public function setDateClosed(?\DateTimeImmutable $dateClosed): static
+    {
+        $this->dateClosed = $dateClosed;
+
+        return $this;
+    }
+
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    public function setNote(?string $note): static
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    public function getStatus(): ?UserRequestStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(UserRequestStatus $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

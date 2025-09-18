@@ -47,7 +47,7 @@ class ProductType extends AbstractType
                     'accept' => 'image/jpeg,image/png,image/gif,image/webp',
                 ],
                 'mapped' => false,
-                'required' => false,
+                'required' => $options['force_image_upload'],
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -76,6 +76,7 @@ class ProductType extends AbstractType
             'data_class' => Product::class,
             'submit_label' => 'Ajouter',
             'image_label' => 'Selectionner une image',
+            'force_image_upload' => false,
         ]);
     }
 }

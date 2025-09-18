@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block javascripts %}
+<script src="/assets/js/tinymce_small.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -16,8 +17,8 @@
     <a id="back" class="btn btn-primary" href="{{ path('requests') }}"><span>arrow_back</span></a>
 
     <div class="container">
-        <div class="ticket">
 
+        <div class="ticket">
             <p class="propertie">Identifiant</p>
             <p class="value">{{ request.id }}</p>
             <p class="propertie">Nom et prénom</p>
@@ -26,14 +27,31 @@
             <p class="value">{{ request.tel is not empty ? request.tel : '/' }}</p>
             <p class="propertie">Adresse email</p>
             <p class="value">{{ request.email is not empty ? request.email : '/' }}</p>
-            <p class="propertie">Messages</p>
-            <div class="value richtext">{{ request.message is not empty ? request.message | raw : '/' }}</div>
             <p class="propertie">Date de création</p>
             <p class="value">{{ request.dateCreated|date('Y/m/d - H\\hi s\\s') }}</p>
             <p class="propertie">Produit associé</p>
             <p class="value">{{ request.product ? request.product.name : 'Aucun produit associé' }}</p>
-
+            <p class="propertie">Messages</p>
+            <div class="value richtext">{{ request.message is not empty ? request.message | raw : '/' }}</div>
         </div>
+
+        <div class="ticket-admin">
+            {{ form_start(form) }}
+
+            <p class="note-label">Note (visible uniquement par l'administrateur)</p>
+            {{ form_widget(form.note) }}
+
+            <div class="ticket-admin-bottom">
+                <div>
+                    <span class="status-label">Statut :</span>
+                    {{ form_widget(form.status) }}
+                </div>
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+
     </div>
 
 </main>

@@ -36,7 +36,7 @@ final class ProductController extends AbstractController
         }
 
         $product = new Product();
-        $form = $this->createForm(ProductType::class, $product, ['submit_label' => 'Ajouter', 'image_label' => 'Selectionner une image']);
+        $form = $this->createForm(ProductType::class, $product, ['submit_label' => 'Ajouter', 'image_label' => 'Selectionner une image', 'force_image_upload' => true]);
 
         $form->handleRequest($request);
         
@@ -44,10 +44,8 @@ final class ProductController extends AbstractController
 
             // Handle file upload
             $image = $form->get('image')->getData();
-            if ($image != null) {
-                $filename = $fileHandler->upload($image);
-                $product->setImage($filename);
-            }
+            $filename = $fileHandler->upload($image);
+            $product->setImage($filename);
 
             // Persist in db
             $em->persist($product);
@@ -73,7 +71,7 @@ final class ProductController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $form = $this->createForm(ProductType::class, $product, ['submit_label' => 'Modifier', 'image_label' => 'Changer l\'image (optionnel)']);
+        $form = $this->createForm(ProductType::class, $product, ['submit_label' => 'Modifier', 'image_label' => 'Changer l\'image (optionnel)', 'force_image_upload' => false]);
 
         $form->handleRequest($request);
 
