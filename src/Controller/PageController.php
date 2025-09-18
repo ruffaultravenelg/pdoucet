@@ -57,7 +57,7 @@ final class PageController extends AbstractController
         }
 
         $page = new Page();
-        $form = $this->createForm(PageType::class, $page, ['submit_label' => 'Ajouter', 'image_label' => 'Selectionner une image']);
+        $form = $this->createForm(PageType::class, $page, ['submit_label' => 'Ajouter', 'image_label' => 'Selectionner une image (optionnel)']);
 
         $form->handleRequest($request);
         

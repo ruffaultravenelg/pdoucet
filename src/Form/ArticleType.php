@@ -35,11 +35,12 @@ class ArticleType extends AbstractType
             ->add('tags', TextType::class, [
                 'label' => 'Tags',
                 'attr' => [
-                    'placeholder' => 'nature, découverte, voyage',
+                    'placeholder' => 'nature; découverte; voyage',
                     'maxlength' => 255,
                     'class' => 'field',
                 ],
                 'required' => false,
+                'empty_data' => '',
             ])
             ->add('author', TextType::class, [
                 'label' => 'Auteur',

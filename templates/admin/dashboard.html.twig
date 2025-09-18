@@ -8,18 +8,18 @@
 
 {% block body %}
 
-<main class="small">
+<main>
 
     <h1>Tableau de bord</h1>
     <p class="subtitle">Gerer le contenu du site web</p>
 
     <div class="links">
-        <a href="{{ path('content') }}" class="btn btn-primary">Modifier les textes statiques</a>
-        <a href="{{ path('pages') }}" class="btn btn-primary">Modifier les pages</a>
-        <a href="{{ path('settings') }}" class="btn btn-primary">Modifier les paramètres généraux</a>
-        <a href="{{ path('header') }}" class="btn btn-primary">Modifier le header</a>
-        <a href="{{ path('statistics') }}" class="btn btn-primary">Statistiques</a>
-        <a href="{{ path('requests') }}" class="btn btn-primary">Messages</a>
+        <a href="{{ path('content') }}" class="btn btn-primary"><span>format_paragraph</span>Modifier les textes statiques</a>
+        <a href="{{ path('pages') }}" class="btn btn-primary"><span>insert_drive_file</span>Modifier les pages</a>
+        <a href="{{ path('settings') }}" class="btn btn-primary"><span>function</span>Variables générales</a>
+        <a href="{{ path('header') }}" class="btn btn-primary"><span>page_header</span>Modifier le header</a>
+        <a href="{{ path('statistics') }}" class="btn btn-primary"><span>area_chart</span>Statistiques</a>
+        <a href="{{ path('requests') }}" class="btn btn-primary"><span>message</span>Messages</a>
     </div>
 
 </main>

@@ -38,3 +38,8 @@
     top: var(--page-padding);
     right: var(--page-padding);
 }
+
+.no-friends{
+    font-size: 1rem;
+    color: var(--color-placeholder);
+}

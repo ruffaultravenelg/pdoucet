@@ -55,6 +55,7 @@
 {% endif %}
 
 <!-- COUPS DE CŒUR -->
+{% if heartPics is not empty or is_admin() %}
 <section class="heart">
 
     <h3>Coups de cœur du moment</h3>
@@ -102,8 +103,10 @@
     </div>
 
 </section>
+{% endif %}
 
 <!-- DEPECHE -->
+{% if depeches is not empty or is_admin() %}
 <section class="depeche">
 
     <h2>Nouvelles du monde</h2>
@@ -124,8 +127,10 @@
     {% endif %}
 
 </section>
+{% endif %}
 
 <!-- LINKS -->
+{% if links is not empty or is_admin() %}
 <section class="links">
 
     {% for link in links %}
@@ -155,5 +160,6 @@
     {% endif %}
 
 </section>
+{% endif %}
 
 {% endblock %}

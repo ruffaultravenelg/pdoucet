@@ -53,3 +53,9 @@
     right: var(--page-padding);
     top: var(--page-padding);
 }
+
+.no-pages{
+    text-align: center;
+    font-size: 1rem;
+    color: var(--color-placeholder);
+}
