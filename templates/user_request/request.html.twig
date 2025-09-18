@@ -31,7 +31,7 @@
             <p class="value">{{ request.dateCreated|date('Y/m/d - H\\hi s\\s') }}</p>
             <p class="propertie">Produit associé</p>
             <p class="value">{{ request.product ? request.product.name : 'Aucun produit associé' }}</p>
-            <p class="propertie">Messages</p>
+            <p class="propertie">Message</p>
             <div class="value richtext">{{ request.message is not empty ? request.message | raw : '/' }}</div>
         </div>
 
